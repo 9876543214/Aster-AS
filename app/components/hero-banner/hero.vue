@@ -3,28 +3,30 @@
     <div class="background">
       <img
         id="hero-image"
-        src="/images/hero-background.png"
+        src="/images/background/hero-background.png"
         alt="background image"
       />
     </div>
-    <div class="left">
-      <h1>Fra strategi <br />til handling</h1>
-      <p>
-        Vi hjelper virksomheter med å lykkes i digital transformasjon
-        <br />ved å kombinere erfaring, innsikt og effektive prosesser -
-        <br />levert av våre dyktige konsulenter!
-      </p>
-      <div class="buttons">
-        <div class="btn fill">Om oss</div>
-        <div class="btn">Kontakt</div>
+    <div class="hero-content">
+      <div class="left">
+        <h1>Fra strategi til handling</h1>
+        <p>
+          Vi hjelper virksomheter med å lykkes i digital transformasjon ved å
+          kombinere erfaring, innsikt og effektive prosesser - levert av våre
+          dyktige konsulenter!
+        </p>
+        <div class="buttons">
+          <div class="btn fill">Om oss</div>
+          <div class="btn">Kontakt</div>
+        </div>
       </div>
-    </div>
-    <div class="right">
-      <img
-        class="logo-icon"
-        src="/images/logo-icon-color.svg"
-        alt="logo icon with color"
-      />
+      <div class="right">
+        <img
+          class="logo-icon"
+          src="/images/logos/logo-icon-color.svg"
+          alt="logo icon with color"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -36,82 +38,111 @@ export default {
 </script>
 
 <style scoped>
-.hero-banner {
-  height: 100vh;
+body {
   width: 100vw;
+  height: 90vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato";
+  overflow-x: hidden;
+}
+
+.hero-banner {
+  width: 100vw;
+  height: 80vh;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   color: #333;
-  overflow: hidden;
+  overflow-y: hidden;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 88%;
 }
 
 .background {
   position: absolute;
   z-index: -1;
-  top: -5vh;
+  top: calc(-460px + 10vw);
+  overflow: hidden;
+  height: calc(100vh + 460px - 10vw);
+  overflow: hidden;
 }
 
 #hero-image {
   width: 100vw;
-  height: 105vh;
+  min-width: 1920px;
+  min-height: 1080px;
 }
 
 .logo-icon {
-  width: 60%;
+  position: absolute;
+  top: 24%;
+  left: 60%;
+  width: calc(110px + 17vw);
+  height: auto;
 }
 
 .left {
   display: flex;
   flex-direction: column;
-  padding-left: 130px;
 }
 
 .right {
   max-width: 50vw;
   display: flex;
-  height: 77vh;
-  justify-content: right;
-  align-items: center;
+  height: fit-content;
 }
 
 h1 {
+  margin-top: 80px;
   font-family: montserrat;
-  font-size: 55px;
-  margin-top: 130px;
+  font-size: calc(34px + 0.5vw);
+  width: calc(295px + 7.5vw);
 }
 
 p {
-  margin-top: 45px;
+  margin-top: 34px;
   font-family: lato;
-  font-size: 21px;
+  font-size: calc(12px + 0.3vw);
+  width: calc(295px + 7.5vw);
 }
 
 .buttons {
   margin-top: 60px;
   display: flex;
-  gap: 30px;
+  gap: 45px;
 }
 
 .btn {
-  background-color: #00000000;
+  background-color: transparent;
   border: 1px solid #000;
-  border-radius: 10px;
-  padding: 14px 24px;
+  border-radius: 7.5px;
+  padding: 12px 24px;
   color: #333;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
-}
-
-.btn:hover {
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
+  transition: color 0.5s, transform 0.2s, background-color 0.3s;
 }
 
 .fill {
   background-color: #1a237e;
   color: white;
+  border: none;
 }
 
 .fill:hover {
-  background-color: #212989;
+  background-color: #1e299b;
+}
+
+@media (max-width: 820px) {
+  .right {
+    display: none;
+  }
 }
 </style>

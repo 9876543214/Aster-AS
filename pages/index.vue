@@ -18,6 +18,7 @@ export default {
   <div>
     <Nav />
     <Hero />
+    <Footer />
   </div>
 </template>
 
@@ -27,6 +28,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato";
-  overflow: hidden;
+  overflow-x: hidden;
 }
 </style>
