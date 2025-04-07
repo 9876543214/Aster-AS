@@ -7,6 +7,7 @@
         alt="background image"
       />
     </div>
+    <div class="size"></div>
     <div class="hero-content">
       <div class="left">
         <h1>Fra strategi til handling</h1>
@@ -40,7 +41,6 @@ export default {
 <style scoped>
 body {
   width: 100vw;
-  height: 90vh;
   margin: 0;
   padding: 0;
   font-family: "Lato";
@@ -49,7 +49,7 @@ body {
 
 .hero-banner {
   width: 100vw;
-  height: 80vh;
+  height: min-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,15 +63,20 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   width: 88%;
+  height: min-content;
 }
 
 .background {
   position: absolute;
   z-index: -1;
   top: calc(-460px + 10vw);
-  overflow: hidden;
-  height: calc(100vh + 460px - 10vw);
-  overflow: hidden;
+}
+
+.size {
+  background-color: #000;
+  height: calc(100vh - 76px);
+  max-height: calc(1000px - 460px + 10vw);
+  position: relative;
 }
 
 #hero-image {
@@ -82,7 +87,7 @@ body {
 
 .logo-icon {
   position: absolute;
-  top: 24%;
+  top: min(24%, 200px);
   left: 60%;
   width: calc(110px + 17vw);
   height: auto;

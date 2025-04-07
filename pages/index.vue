@@ -18,6 +18,7 @@ export default {
   <div>
     <Nav />
     <Hero />
+    <services />
     <Footer />
   </div>
 </template>
@@ -29,5 +30,10 @@ body {
   padding: 0;
   font-family: "Lato";
   overflow-x: hidden;
+}
+h1,
+h2,
+h3 {
+  font-family: "Montserrat";
 }
 </style>
