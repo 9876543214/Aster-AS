@@ -1,4 +1,27 @@
-<script>
+<script setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    const elements = document.querySelectorAll(".pop-up-element-services");
+    elements.forEach((element, index) => {
+      element.style.transitionDelay = `${index * 0.1}s`; // Add delay based on index
+      observer.observe(element);
+    });
+  }
+});
 </script>
 
 <template>
@@ -7,7 +30,7 @@
       <h1>Våre tjenester</h1>
     </div>
     <div class="services-content">
-      <div class="it">
+      <div class="it pop-up-element-services hidden">
         <img
           src="/images/icons/pc_icon.svg"
           alt="datamaskin ikon"
@@ -18,7 +41,7 @@
           <p>Rådgivning og prosjektledelse for teknologiske løsninger</p>
         </div>
       </div>
-      <div class="logistikk">
+      <div class="logistikk pop-up-element-services hidden">
         <img
           src="/images/icons/truck_icon.svg"
           alt="lastebil ikon"
@@ -29,7 +52,7 @@
           <p>Effektivisering og målrettet forbedring av verdikjeder</p>
         </div>
       </div>
-      <div class="sikkerhet">
+      <div class="sikkerhet pop-up-element-services hidden">
         <img src="/images/icons/key_icon.svg" alt="nøkkel ikon" id="key" />
         <div>
           <h2>Cybersikkerhet og samsvar</h2>
@@ -99,6 +122,18 @@
   width: 75px;
   height: 75px;
   margin-bottom: 1rem;
+}
+
+.pop-up-element-services {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: all 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.pop-up-element-services.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media screen and (max-width: 1100px) {

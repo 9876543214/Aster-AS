@@ -1,4 +1,36 @@
-<script>
+<script setup>
+import { onMounted } from "vue";
+
+onMounted(() => {
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Reset transform to translateY(0) when the .show class is added
+            entry.target.style.transform = "translateY(0)";
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+
+    const elements = document.querySelectorAll(".pop-up-element-choose");
+    elements.forEach((element) => {
+      // Generate random delay between 0.1s and 0.5s
+      const randomDelay = (Math.random() * 0.2 + 0.1).toFixed(2);
+      element.style.transitionDelay = `${randomDelay}s`;
+
+      // Generate random translateY distance between 150px and 250px
+      const randomDistance = Math.random() * 100 + 150;
+      element.style.transform = `translateY(${randomDistance}px)`;
+
+      observer.observe(element);
+    });
+  }
+});
 </script>
 
 <template>
@@ -7,7 +39,7 @@
       <h1>Hvorfor velge Aster?</h1>
     </div>
     <div class="choose-content">
-      <div class="stjernekonsulenter">
+      <div class="stjernekonsulenter pop-up-element-choose">
         <div class="img">
           <img src="/images/icons/star_icon.svg" alt="stjerne ikon" id="star" />
         </div>
@@ -16,7 +48,7 @@
           <p>Erfarne konsulenter med både teknisk og økonomisk ekspertise</p>
         </div>
       </div>
-      <div class="resultat">
+      <div class="resultat pop-up-element-choose">
         <div class="img">
           <img
             src="/images/icons/chart_icon.svg"
@@ -29,7 +61,7 @@
           <p>Vi leverer tjenester av høy kvalitet til riktig tid og kostnad</p>
         </div>
       </div>
-      <div class="kompetanse">
+      <div class="kompetanse pop-up-element-choose">
         <div class="img">
           <img src="/images/icons/cogs_icon.svg" alt="tannhjul ikon" id="cog" />
         </div>
@@ -51,6 +83,7 @@
   align-items: center;
   row-gap: 2.7rem;
   margin-bottom: 3rem;
+  margin-top: 8rem;
 }
 .choose-content {
   display: flex;
@@ -114,6 +147,17 @@
 #cog {
   width: 75px;
   height: 75px;
+}
+.pop-up-element-choose {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: all 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.pop-up-element-choose.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media screen and (max-width: 1100px) {
