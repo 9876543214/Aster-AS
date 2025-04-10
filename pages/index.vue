@@ -19,6 +19,7 @@ export default {
     <Nav />
     <Hero />
     <services />
+    <choose />
     <Footer />
   </div>
 </template>

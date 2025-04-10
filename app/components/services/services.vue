@@ -26,7 +26,7 @@
         />
         <div>
           <h2>Logistikk & distrubisjon</h2>
-          <p>Effektivisering og forbedring av verdikjeder</p>
+          <p>Effektivisering og målrettet forbedring av verdikjeder</p>
         </div>
       </div>
       <div class="sikkerhet">
@@ -63,24 +63,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: min-content;
+  justify-content: end;
+  width: 300px;
 }
 .services-content div div {
   display: flex;
   flex-direction: column;
   row-gap: 0;
+  align-items: start;
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 0.8rem;
+  background-color: #1a237e;
 }
 .services-content h2 {
   font-size: 20px;
   white-space: nowrap;
+  color: white;
 }
 
 .services-content p {
   font-size: 14px;
   margin-top: 0;
+  color: white;
 }
 
 #key {
@@ -94,7 +98,7 @@
 #computer {
   width: 75px;
   height: 75px;
-  margin-bottom: 0.78rem;
+  margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 1100px) {
