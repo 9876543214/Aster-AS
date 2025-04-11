@@ -1,5 +1,7 @@
 <script>
+import customers from "~/app/components/customers/customers.vue";
 export default {
+  components: { customers },
   name: "HomePage",
 };
 </script>
@@ -20,6 +22,7 @@ export default {
     <Hero />
     <services />
     <choose />
+    <customers />
     <Footer />
   </div>
 </template>
@@ -30,7 +33,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato";
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 h1,
 h2,

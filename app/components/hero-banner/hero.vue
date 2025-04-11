@@ -54,7 +54,7 @@ body {
   flex-direction: row;
   justify-content: center;
   color: #333;
-  overflow-y: hidden;
+  overflow: hidden !important;
 }
 
 .hero-content {
@@ -70,6 +70,8 @@ body {
   position: absolute;
   z-index: -1;
   top: calc(-460px + 10vw);
+  width: 100vw;
+  overflow: hidden;
 }
 
 .size {

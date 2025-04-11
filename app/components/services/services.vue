@@ -7,17 +7,26 @@ onMounted(() => {
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Reset transform to translateY(0) when the .show class is added
+            entry.target.style.transform = "translateY(0)";
             entry.target.classList.add("show");
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0 }
     );
 
     const elements = document.querySelectorAll(".pop-up-element-services");
-    elements.forEach((element, index) => {
-      element.style.transitionDelay = `${index * 0.1}s`; // Add delay based on index
+    elements.forEach((element) => {
+      // Generate random delay between 0.1s and 0.5s
+      const randomDelay = (Math.random() * 0.2 + 0.1).toFixed(2);
+      element.style.transitionDelay = `${randomDelay}s`;
+
+      // Generate random translateY distance between 150px and 250px
+      const randomDistance = Math.random() * 100 + 150;
+      element.style.transform = `translateY(${randomDistance}px)`;
+
       observer.observe(element);
     });
   }
@@ -137,7 +146,7 @@ onMounted(() => {
 }
 
 @media screen and (max-width: 1100px) {
-  .services-content {
+  .choose-content {
     gap: 5%;
   }
 }
