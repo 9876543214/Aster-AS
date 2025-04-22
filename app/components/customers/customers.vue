@@ -68,7 +68,7 @@
 .gradient {
   margin-top: 110px;
   width: 100vw;
-  height: 10px;
+  height: 20px;
   background: linear-gradient(
     to bottom,
     #eae0e000 0%,
@@ -120,7 +120,7 @@
   transition: transform 0.3s ease;
 }
 #vegvesen {
-  width: 210px;
+  width: 190px;
   height: auto;
   object-fit: contain;
 }
@@ -130,22 +130,22 @@
   object-fit: contain;
 }
 #posten {
-  width: 190px;
+  width: 180px;
   height: auto;
   object-fit: contain;
 }
 #rema {
-  width: 150px;
+  width: 130px;
   height: auto;
   object-fit: contain;
 }
 #rema-distrubisjon {
-  width: 150px;
+  width: 130px;
   height: auto;
   object-fit: contain;
 }
 #kolly {
-  width: 200px;
+  width: 180px;
   height: auto;
   object-fit: contain;
 }

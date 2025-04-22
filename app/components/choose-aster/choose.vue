@@ -76,14 +76,13 @@ onMounted(() => {
 
 <style>
 .choose {
-  background-color: white;
   display: flex;
   flex-direction: column;
   z-index: 2;
   align-items: center;
   row-gap: 2.7rem;
   margin-bottom: 3rem;
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 .choose-content {
   display: flex;
@@ -151,7 +150,7 @@ onMounted(() => {
 .pop-up-element-choose {
   opacity: 0;
   transform: translateY(200px);
-  transition: all 0.6s ease-out;
+  transition: all 0.8s ease-in-out;
   will-change: transform, opacity;
 }
 

@@ -74,13 +74,14 @@ onMounted(() => {
 
 <style>
 .services {
-  background-color: white;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   z-index: 2;
   align-items: center;
   row-gap: 3rem;
   margin-bottom: 3rem;
+  padding-top: 2rem;
 }
 .services-content {
   display: flex;
@@ -104,7 +105,7 @@ onMounted(() => {
   row-gap: 0;
   align-items: start;
   border-radius: 10px;
-  padding: 0.8rem;
+  padding: 0.6rem;
   background-color: #1a237e;
 }
 .services-content h2 {
@@ -136,7 +137,7 @@ onMounted(() => {
 .pop-up-element-services {
   opacity: 0;
   transform: translateY(200px);
-  transition: all 0.6s ease-out;
+  transition: all 0.8s ease-in-out;
   will-change: transform, opacity;
 }
 

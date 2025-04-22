@@ -34,6 +34,7 @@ body {
   padding: 0;
   font-family: "Lato";
   overflow-x: hidden !important;
+  background-color: #f4f4f4;
 }
 h1,
 h2,

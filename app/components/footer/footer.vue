@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-content">
       <div class="footer-1">
-        <h2>logo placeholder</h2>
+        <img src="/images/logos/logo-white-text.svg" alt="" />
 
         <p>
           Strategisk rådgivning og projektledelse <br />innen IT, telekom og
@@ -66,7 +66,7 @@ footer h2 {
   margin-bottom: 1rem;
 }
 .footer-content {
-  width: 88%;
+  width: 85%;
   display: flex;
   flex-wrap: wrap;
   position: relative;
