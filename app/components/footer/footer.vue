@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-content">
       <div class="footer-1">
-        <img src="/images/logos/logo-white-text.svg" alt="" />
+        <h2>logo placeholder</h2>
 
         <p>
           Strategisk rådgivning og projektledelse <br />innen IT, telekom og

@@ -5,7 +5,7 @@
     <div class="customer-logos">
       <div>
         <img
-          src="/public/images/customers/Rema1000-logo.svg"
+          src="/images/customers/Rema1000-logo.svg"
           alt="Rema 1000 Logo"
           class="logo"
           id="rema"

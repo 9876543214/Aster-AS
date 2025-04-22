@@ -1,7 +1,8 @@
 <script>
+import Contact from "~/app/components/contact/contact.vue";
 import customers from "~/app/components/customers/customers.vue";
 export default {
-  components: { customers },
+  components: { customers, Contact },
   name: "HomePage",
 };
 </script>
@@ -23,6 +24,7 @@ export default {
     <services />
     <choose />
     <customers />
+    <contact />
     <Footer />
   </div>
 </template>
