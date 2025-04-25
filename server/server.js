@@ -4,7 +4,22 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const mysql = require('mysql2/promise');
-const passwords = require('./passwords.json');
+require('dotenv').config();
+
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.EMAIL_DB_WRITE_USER,
+    password: process.env.EMAIL_DB_WRITE_PASS,
+    database: 'email_confirmation',
+});
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.SEND_EMAIL_USER,
+        pass: process.env.SEND_EMAIL_PASS,
+    },
+});
 
 const app = express();
 const PORT = 3000;
@@ -13,12 +28,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Database connection
-const db = mysql.createPool({
-    host: 'localhost',
-    user: 'your-db-user',
-    password: 'your-db-password',
-    database: 'your-database-name',
-});
+
 
 // Email sending endpoint
 app.post('/api/send-email', async (req, res) => {
@@ -42,12 +52,12 @@ app.post('/api/send-email', async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: passwords.sendEmail.user,
-                pass: passwords.sendEmail.pass,
+                user: process.env.SEND_EMAIL_USER,
+                pass: process.env.SEND_EMAIL_PASS,
             },
         });
 
-        const confirmationLink = `http://localhost:${PORT}/api/confirm-email?token=${token}`;
+        const confirmationLink = `${process.env.VUE_APP_API_BASE_URL}/api/confirm-email?token=${token}`;
         const mailOptions = {
             from: passwords.sendEmail.user,
             to: email,
@@ -118,5 +128,5 @@ setInterval(async () => { // deletes expired records every 3 hours
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on ${process.env.VUE_APP_API_BASE_URL}`);
 });

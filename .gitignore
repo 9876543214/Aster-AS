@@ -9,7 +9,6 @@ dist
 # Node dependencies
 node_modules
 
-/server/passwords.json
 
 # Logs
 logs

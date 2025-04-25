@@ -3,7 +3,7 @@
     <div class="background">
       <img
         id="hero-image"
-        src="/images/background/hero-background.png"
+        src="/images/website_images/hero_background.png"
         alt="background image"
       />
     </div>

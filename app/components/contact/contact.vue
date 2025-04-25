@@ -14,13 +14,16 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await fetch("http://localhost:3000/api/send-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(this.formData),
-        });
+        const response = await fetch(
+          `${process.env.VUE_APP_API_BASE_URL}/api/send-email`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(this.formData),
+          }
+        );
 
         if (response.ok) {
           alert("Meldingen ble sendt!");
