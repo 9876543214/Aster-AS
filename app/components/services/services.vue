@@ -105,13 +105,16 @@ onMounted(() => {
   row-gap: 0;
   align-items: start;
   border-radius: 10px;
-  padding: 0.6rem;
+  padding: 1rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
   background-color: #1a237e;
 }
 .services-content h2 {
   font-size: 20px;
   white-space: nowrap;
   color: white;
+  margin-bottom: 0.9rem;
 }
 
 .services-content p {

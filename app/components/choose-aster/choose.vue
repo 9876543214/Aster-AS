@@ -113,7 +113,9 @@ onMounted(() => {
   flex-direction: column;
   align-items: start !important;
   border-radius: 10px;
-  padding: 0.8rem;
+  padding: 1rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
   background-color: #1a237e;
   color: white;
 }
@@ -121,6 +123,7 @@ onMounted(() => {
   font-size: 20px;
   white-space: nowrap;
   width: 245px;
+  margin-bottom: 0.9rem;
 }
 
 .choose-content p {

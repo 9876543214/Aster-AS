@@ -94,6 +94,7 @@
   z-index: 2;
   align-items: center;
   row-gap: 2rem;
+  overflow: hidden;
 }
 .customer-logos {
   display: flex;
@@ -101,9 +102,9 @@
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   width: 80%;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 .customer-logos div {
   display: flex;
