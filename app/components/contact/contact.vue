@@ -13,17 +13,15 @@ export default {
   },
   methods: {
     async submitForm() {
+      console.log("API Base URL:", process.env.VUE_APP_API_BASE_URL);
       try {
-        const response = await fetch(
-          `${process.env.VUE_APP_API_BASE_URL}/api/send-email`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(this.formData),
-          }
-        );
+        const response = await fetch(`/api/send-email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.formData),
+        });
 
         if (response.ok) {
           alert("Meldingen ble sendt!");
@@ -124,7 +122,9 @@ export default {
               v-model="formData.phone"
               class="input"
               placeholder="Telefon"
-              @input="formData.phone = formData.phone.replace(/[^0-9 ]/g, '')"
+              @input="
+                formData.phone = formData.phone.replace(/(?!^\+)[^0-9 ]/g, '')
+              "
             />
           </div>
           <div>
