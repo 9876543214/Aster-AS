@@ -1,7 +1,8 @@
-// filepath: c:\Users\Ulrik\IT-utvikling\Vue.js\Aster\aster-as\server\api\send-email
 import nodemailer from 'nodemailer';
 import { v4 as uuidv4 } from 'uuid';
 import mysql from 'mysql2/promise';
+import ejs from 'ejs';
+import path from 'path';
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -15,14 +16,6 @@ export default defineEventHandler(async (event) => {
     const { name, email, phone, occasion, message } = body;
 
     console.log('Request body:', body); // Log the request body
-    console.log('Environment variables:', {
-        DB_HOST: process.env.DB_HOST,
-        EMAIL_DB_WRITE_USER: process.env.EMAIL_DB_WRITE_USER,
-        EMAIL_DB_WRITE_PASS: process.env.EMAIL_DB_WRITE_PASS,
-        SEND_EMAIL_USER: process.env.SEND_EMAIL_USER,
-        SEND_EMAIL_PASS: process.env.SEND_EMAIL_PASS,
-        BASE_URL: process.env.BASE_URL,
-    });
 
     if (!name || !email || !message) {
         throw createError({ statusCode: 400, message: 'Alle feltene må fylles ut.' });
@@ -49,14 +42,18 @@ export default defineEventHandler(async (event) => {
         });
         console.log('Transporter created successfully'); // Log after creating the transporter
 
-        const confirmationLink = `${process.env.BASE_URL}/emailConfirmation?token=${token}`;
+        const confirmationLink = `${process.env.BASE_URL}emailConfirmation?token=${token}`;
         console.log('Confirmation link:', confirmationLink); // Log the confirmation link
+
+        // Render the EJS template
+        const templatePath = path.resolve('server/templates/emailTemplate.ejs');
+        const emailHtml = await ejs.renderFile(templatePath, { name, confirmationLink });
 
         const mailOptions = {
             from: process.env.SEND_EMAIL_USER,
             to: email,
             subject: 'Bekreft e-posten din',
-            text: `Hei ${name},\n\nKlikk på lenken nedenfor for å bekrefte e-posten din:\n\n${confirmationLink}\n\nTakk!`,
+            html: emailHtml, // Use the rendered HTML from the EJS template
         };
         console.log('Mail options:', mailOptions); // Log the mail options
 
