@@ -1,5 +1,8 @@
 <script>
+import Contact from "~/app/components/contact/contact.vue";
+import customers from "~/app/components/customers/customers.vue";
 export default {
+  components: { customers, Contact },
   name: "HomePage",
 };
 </script>
@@ -18,6 +21,11 @@ export default {
   <div>
     <Nav />
     <Hero />
+    <services />
+    <choose />
+    <customers />
+    <contact />
+    <Footer />
   </div>
 </template>
 
@@ -27,6 +35,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Lato";
-  overflow: hidden;
+  overflow-x: hidden !important;
+  background-color: #f4f4f4;
+}
+h1,
+h2,
+h3 {
+  font-family: "Montserrat";
 }
 </style>
