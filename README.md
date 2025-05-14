@@ -6,8 +6,9 @@ This repository contains the source code for the official website of **Aster**, 
 
 - [Features](#features)
 - [Technologies Used](#technologies-used)
-- [Prerequisites](#Prerequisites)
+- [Prerequisites](#prerequisites)
 - [Setup](#setup)
+   (Note: Project isnt finished, so the setup will not work properly yet)
 - [Folder Structure](#folder-structure)
 
 ---
@@ -41,6 +42,8 @@ This repository contains the source code for the official website of **Aster**, 
 - npm, pnpm, yarn, or bun
 - Mariadb ver 11.7 or above installed locally
 
+---
+
 ## Setup
 
 1. Clone the repository:
@@ -73,9 +76,12 @@ This repository contains the source code for the official website of **Aster**, 
    - Leave no space between the "=" and the value you entered
    - Passwords can be left empty
 
+
 5. Edit all the variables (text with "{}" around it) in the "db.sql" file in the "server" folder to the values you entered in the ".env" file with the corresponding variable names
 
+
 6. Edit "emailConfig" in "server/config" to your own email host
+
 
 7. Create databases and table structure
 
@@ -111,9 +117,9 @@ This repository contains the source code for the official website of **Aster**, 
 
    ```
 
-   - Paste the entire "db.sql" file with the changed variables into mariadb
+   - Paste the entire content of the "db.sql" file with the changed variables into mariadb
   
-   - Paste the entire "default_data.sql" file in the "server/utils" folder into mariadb
+   - Paste the entire content of the "default_data.sql" file in the "server/utils" folder into mariadb
   
 8. Navigate back to the root folder of the cloned repostitory in a terminal/cmd
 
