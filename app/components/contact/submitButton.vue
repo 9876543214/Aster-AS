@@ -31,7 +31,7 @@ export default {
       if (newVal) {
         this._spin80Timer = setTimeout(() => {
           this.$emit("spin-ended");
-        }, 2730);
+        }, 2780);
       } else {
         clearTimeout(this._spin80Timer);
       }
@@ -88,6 +88,7 @@ export default {
   height: 40px;
   padding: 12px 12px;
   pointer-events: none;
+  transition: 200ms;
 }
 
 .submit-button.submitting img {
@@ -99,7 +100,7 @@ export default {
 }
 
 .submit-button.success {
-  border-color: rgb(0, 123, 29) !important;
+  border-color: rgb(0, 148, 25) !important;
 }
 
 .submit-button.failure {
@@ -107,7 +108,7 @@ export default {
 }
 
 .submit-button.success i {
-  color: rgb(0, 123, 29); /* Green for success */
+  color: rgb(0, 148, 25); /* Green for success */
   position: relative;
 }
 

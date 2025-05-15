@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
         const emailHtml = await ejs.renderFile(templatePath, { name, confirmationLink });
 
         const mailOptions = {
-            from: 'wrong@email.com',
+            from: process.env.SEND_EMAIL_USER,
             to: email,
             subject: 'Bekreft e-posten din',
             html: emailHtml, // Use the rendered HTML from the EJS template
