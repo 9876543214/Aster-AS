@@ -20,12 +20,18 @@ INSERT into aster_index_content_text (content) VALUES
 
 INSERT into aster_index_content_images (file_name, folder_name) VALUES
 ('hero_background.png', 'background'),
-('index_2.jpg', 'index'),
-('index_3.jpg', 'index'),
-('index_4.jpg', 'index'),
-('index_5.jpg', 'index'),
-('index_6.jpg', 'index'),
-('index_7.jpg', 'index'),
-('index_8.jpg', 'index'),
-('index_9.jpg', 'index'),
-('index_10.jpg', 'index');
+('pc_icon.svg', 'icons'),
+('truck_icon.svg', 'icons'),
+('key_icon.svg', 'icons'),
+('star_icon.svg', 'icons'),
+('chart_icon.svg', 'icons'),
+('cogs_icon.svg', 'icons'),
+
+INSERT into aster_contact_content_text (content) VALUES
+('Kontakt oss'),
+('Ring oss'),
+('+47 123 45 678'),
+('Email oss'),
+('kontakt@aster.no'),
+('Besøk oss'),
+('Havnabakken 33')

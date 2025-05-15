@@ -32,6 +32,8 @@ export default {
 
       this.isSubmitting = true;
       this.isSuccess = null;
+      this.pendingSuccess = null;
+      this.submitted = false;
 
       try {
         const response = await fetch(`/api/send-email`, {
@@ -40,7 +42,7 @@ export default {
           body: JSON.stringify(this.formData),
         });
 
-        this.isSuccess = response.ok;
+        this.pendingSuccess = response.ok;
         if (response.ok) {
           this.formData = {
             name: "",
@@ -52,11 +54,15 @@ export default {
         }
       } catch (error) {
         console.error("Error sending email:", error);
-        this.isSuccess = false;
-      } finally {
-        setTimeout(() => (this.isSubmitting = false), 4000);
-        setTimeout(() => (this.isSuccess = null), 6000);
+        this.pendingSuccess = false;
       }
+    },
+    onSpinEnded() {
+      this.isSuccess = this.pendingSuccess;
+      this.isSubmitting = false;
+      this.submitted = true;
+      setTimeout(() => (this.submitted = false), 2000);
+      setTimeout(() => (this.isSuccess = null), 2000);
     },
   },
 };
@@ -108,7 +114,12 @@ export default {
         placeholder="Melding*"
       ></textarea>
     </div>
-    <SubmitButton :isSubmitting="isSubmitting" :isSuccess="isSuccess" />
+    <SubmitButton
+      :isSubmitting="isSubmitting"
+      :isSuccess="isSuccess"
+      :submitted="submitted"
+      @spin-ended="onSpinEnded"
+    />
   </form>
 </template>
 
@@ -126,6 +137,7 @@ export default {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
 .form div {
   display: flex;
   width: 85%;
@@ -133,9 +145,10 @@ export default {
   align-items: center;
   gap: 20px;
 }
+
 .form input,
 .form select {
-  width: 81.8%;
+  width: 100%;
   height: 40px;
   border: 1px solid #e1e1e1;
   color: #656565;
@@ -147,7 +160,8 @@ export default {
 
 .form select {
   cursor: pointer;
-  height: 41.343px;
+  height: 43.343px;
+  width: 103.724%;
 }
 
 select:invalid {
@@ -171,6 +185,7 @@ select:invalid {
   font-family: lato;
   font-size: 13px;
 }
+
 @media screen and (max-width: 830px) {
   .form {
     width: 400px;
@@ -182,6 +197,7 @@ select:invalid {
     width: 300px;
   }
 }
+
 @media screen and (max-width: 560px) {
   .form {
     order: 1;

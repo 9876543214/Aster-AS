@@ -5,22 +5,40 @@
     :class="{
       submitting: isSubmitting,
       success: isSuccess,
+      submitted: submitted,
       failure: isSuccess === false,
     }"
     :disabled="isSubmitting"
+    @animationend="handleAnimationEnd"
   >
-    <span v-if="!isSubmitting">Send nå</span>
-    <img v-if="isSubmitting" src="/images/icons/arrow-right.svg" alt="arrow" />
-    <i v-if="isSubmitting && isSuccess === true" class="fa-solid fa-check"></i>
-    <i v-if="isSubmitting && isSuccess === false" class="fa-solid fa-times"></i>
+    <span v-if="!isSubmitting && !submitted">Send nå</span>
+    <img src="/images/icons/arrow-right.svg" alt="arrow" />
+    <i v-if="submitted && isSuccess === true" class="fa-solid fa-check"></i>
+    <i v-if="submitted && isSuccess === false" class="fa-solid fa-times"></i>
   </button>
 </template>
 
 <script>
+import "@fortawesome/fontawesome-free/css/all.min.css";
 export default {
   props: {
     isSubmitting: Boolean,
     isSuccess: Boolean,
+    submitted: Boolean,
+  },
+  watch: {
+    isSubmitting(newVal) {
+      if (newVal) {
+        this._spin80Timer = setTimeout(() => {
+          this.$emit("spin-ended");
+        }, 2730);
+      } else {
+        clearTimeout(this._spin80Timer);
+      }
+    },
+  },
+  beforeDestroy() {
+    clearTimeout(this._spin80Timer);
   },
 };
 </script>
@@ -59,12 +77,42 @@ export default {
   pointer-events: none; /* Prevent interaction while animating */
 }
 
+.submit-button.submitted {
+  border: 2px solid #196164;
+  color: transparent;
+  background: none;
+  outline: none;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 12px 12px;
+  pointer-events: none;
+}
+
 .submit-button.submitting img {
   display: none;
 }
 
+.submit-button.submitted img {
+  display: none;
+}
+
+.submit-button.success {
+  border-color: rgb(0, 123, 29) !important;
+}
+
+.submit-button.failure {
+  border-color: #dc3545 !important;
+}
+
 .submit-button.success i {
-  color: #28a745; /* Green for success */
+  color: rgb(0, 123, 29); /* Green for success */
+  position: relative;
+}
+
+.submit-button.failure {
+  animation: shake 0.5s ease-in-out;
 }
 
 .submit-button.failure i {
@@ -88,28 +136,26 @@ export default {
   }
 }
 
-i {
-  position: absolute;
-  color: transparent;
-  transition: 200ms;
-}
-
-@keyframes spin {
-  80% {
-    border: 2px solid transparent;
-    border-left: 2px solid #196164;
-    background: none;
-  }
+@keyframes shake {
+  0%,
   100% {
-    transform: rotate(720deg);
-    border: 2px solid #196164;
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
   }
 }
 
-@keyframes check {
-  to {
-    color: #196164;
-  }
+i {
+  transition: 200ms;
+  color: transparent;
+  font-size: 18px;
 }
 
 .submit-button img {

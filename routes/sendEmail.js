@@ -6,7 +6,6 @@ const db = require('../db'); // Adjust path to your database connection
 const router = express.Router();
 
 router.post('/send-email', async (req, res) => {
-    console.log('Received request:', req.body);
     const { name, email, phone, occasion, message } = req.body;
 
     if (!name || !email || !message) {
