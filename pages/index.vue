@@ -1,8 +1,5 @@
 <script>
-import Contact from "~/app/components/contact/contact.vue";
-import customers from "~/app/components/customers/customers.vue";
 export default {
-  components: { customers, Contact },
   name: "HomePage",
 };
 </script>

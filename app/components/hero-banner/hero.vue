@@ -3,7 +3,7 @@
     <div class="background">
       <img
         id="hero-image"
-        src="/images/website_images/hero_background.png"
+        src="/images/background/hero_background.png"
         alt="background image"
       />
     </div>
@@ -53,7 +53,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #333;
+
   overflow: hidden !important;
 }
 

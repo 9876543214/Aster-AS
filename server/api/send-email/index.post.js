@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import mysql from 'mysql2/promise';
 import ejs from 'ejs';
 import path from 'path';
+import { transporter } from '../../config/emailConfig.js';
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -31,16 +32,6 @@ export default defineEventHandler(async (event) => {
         );
         console.log('Database query executed successfully'); // Log after the query
 
-        const transporter = nodemailer.createTransport({
-            host: 'mailcluster.loopia.se',
-            port: '587',
-            secure: false, // true for 465, false for other ports
-            auth: {
-                user: process.env.SEND_EMAIL_USER,
-                pass: process.env.SEND_EMAIL_PASS,
-            },
-        });
-        console.log('Transporter created successfully'); // Log after creating the transporter
 
         const confirmationLink = `${process.env.BASE_URL}emailConfirmation?token=${token}`;
         console.log('Confirmation link:', confirmationLink); // Log the confirmation link

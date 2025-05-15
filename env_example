@@ -1,0 +1,68 @@
+# Base URL for the API (e.g., http://localhost:3000)
+VUE_APP_API_BASE_URL=
+
+# Same URL as VUE_APP_API_BASE_URL
+BASE_URL=
+
+# Email address for sending emails (e.g., noreply@example.com)
+SEND_EMAIL_USER=
+
+# Password for the email account used to send emails
+SEND_EMAIL_PASS=
+
+# Email address for receiving emails (e.g., support@example.com)
+RECEIVE_EMAIL_USER=
+
+# Database host (e.g., localhost or a remote database URL)
+DB_HOST=
+
+# Password for the main database
+DB_PASSWORD=
+
+# Read-only user for the email database
+EMAIL_DB_READ_USER=
+
+# Password for the email database read-only user (can be left empty)
+EMAIL_DB_READ_PASS=
+
+# Write user for the email database
+EMAIL_DB_WRITE_USER=
+
+# Password for the email database write user (can be left empty)
+EMAIL_DB_WRITE_PASS=
+
+# Read-only user for the Aster database
+ASTER_DB_READ_USER=
+
+# Password for the Aster database read-only user (can be left empty)
+ASTER_DB_READ_PASS=
+
+# Write user for the Aster database
+ASTER_DB_WRITE_USER=
+
+# Password for the Aster database write user (can be left empty)
+ASTER_DB_WRITE_PASS=
+
+# Read-only user for the Users database
+USERS_DB_READ_USER=
+
+# Password for the Users database read-only user (can be left empty)
+USERS_DB_READ_PASS=
+
+# Write user for the Users database
+USERS_DB_WRITE_USER=
+
+# Password for the Users database write user (can be left empty)
+USERS_DB_WRITE_PASS=
+
+# Default read-only user for the database
+DEFAULT_DB_READ_USER=
+
+# Password for the default database read-only user (can be left empty)
+DEFAULT_DB_READ_PASS=
+
+# Default write user for the database
+DEFAULT_DB_WRITE_USER=
+
+# Password for the default database write user (can be left empty)
+DEFAULT_DB_WRITE_PASS=
