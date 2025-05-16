@@ -75,7 +75,7 @@ export default {
           this.infoMessage =
             "Beklager, det oppstod en feil. Vennligst prøv igjen senere eller send oss en e-post direkte.";
         }
-      }, 550);
+      }, 600);
     },
   },
 };
@@ -247,7 +247,7 @@ select:invalid {
   font-size: 14px;
   position: absolute;
   bottom: 23%;
-  left: 8%;
+  left: 8.2%;
   width: 50% !important;
   background-color: #f4f4f4;
   color: #114042;

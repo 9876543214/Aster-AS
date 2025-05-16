@@ -31,7 +31,7 @@ export default {
       if (newVal) {
         this._spin80Timer = setTimeout(() => {
           this.$emit("spin-ended");
-        }, 2780);
+        }, 2880);
       } else {
         clearTimeout(this._spin80Timer);
       }
