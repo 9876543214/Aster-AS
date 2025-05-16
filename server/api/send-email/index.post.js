@@ -13,10 +13,8 @@ const db = mysql.createPool({
 });
 
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event); // Parse the request body
+    const body = await readBody(event);
     const { name, email, phone, occasion, message } = body;
-
-    console.log('Request body:', body); // Log the request body
 
     if (!name || !email || !message) {
         throw createError({ statusCode: 400, message: 'Alle feltene må fylles ut.' });
@@ -24,19 +22,8 @@ export default defineEventHandler(async (event) => {
 
     try {
         const token = uuidv4();
-        console.log('Generated token:', token); // Log the generated token
-
-        await db.query(
-            'INSERT INTO email_confirmations (name, email, phone, occasion, message, token) VALUES (?, ?, ?, ?, ?, ?)',
-            [name, email, phone, occasion, message, token]
-        );
-        console.log('Database query executed successfully'); // Log after the query
-
 
         const confirmationLink = `${process.env.BASE_URL}emailConfirmation?token=${token}`;
-        console.log('Confirmation link:', confirmationLink); // Log the confirmation link
-
-        // Render the EJS template
         const templatePath = path.resolve('server/templates/emailTemplate.ejs');
         const emailHtml = await ejs.renderFile(templatePath, { name, confirmationLink });
 
@@ -44,16 +31,22 @@ export default defineEventHandler(async (event) => {
             from: process.env.SEND_EMAIL_USER,
             to: email,
             subject: 'Bekreft e-posten din',
-            html: emailHtml, // Use the rendered HTML from the EJS template
+            html: emailHtml,
         };
-        console.log('Mail options:', mailOptions); // Log the mail options
 
         await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully'); // Log after sending the email
+        console.log('Email sent successfully');
+
+        // Only save to DB if email was sent
+        await db.query(
+            'INSERT INTO email_confirmations (name, email, phone, occasion, message, token) VALUES (?, ?, ?, ?, ?, ?)',
+            [name, email, phone, occasion, message, token]
+        );
+        console.log('Database query executed successfully');
 
         return { success: true, message: 'Bekreftelses-e-posten ble sendt.' };
     } catch (error) {
-        console.error('Error sending confirmation email:', error); // Log the error
+        console.error('Error sending confirmation email:', error);
         throw createError({ statusCode: 500, message: 'Noe gikk galt.' });
     }
 });

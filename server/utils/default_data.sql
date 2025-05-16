@@ -34,4 +34,4 @@ INSERT into aster_contact_content_text (content) VALUES
 ('Email oss'),
 ('kontakt@aster.no'),
 ('Besøk oss'),
-('Havnabakken 33')
+('Havnabakken 33  0874, Oslo')

@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
             from: process.env.SEND_EMAIL_USER,
             to: process.env.RECEIVE_EMAIL_USER,
             subject: `${name}: ${occasion}`,
-            text: `Navn: ${name}\nE-post: ${email}\nTelefon: ${phone}\n\nMelding:\n${message}`,
+            text: `Navn: ${name}\nE-post: ${email}\nTelefon: ${phone}\n\nAnledning: ${occasion}\n\nMelding:\n${message}`,
         };
 
         await transporter.sendMail(mailOptions);

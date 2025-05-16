@@ -14,6 +14,8 @@ export default {
       },
       isSubmitting: false,
       isSuccess: null,
+      submitted: false,
+      infoMessage: "",
     };
   },
   methods: {
@@ -27,6 +29,8 @@ export default {
         alert("Vennligst fyll ut alle obligatoriske felter.");
         return;
       }
+
+      this.infoMessage = "";
 
       if (this.isSubmitting) return;
 
@@ -63,16 +67,30 @@ export default {
       this.submitted = true;
       setTimeout(() => (this.submitted = false), 2000);
       setTimeout(() => (this.isSuccess = null), 2000);
+      setTimeout(() => {
+        if (this.isSuccess) {
+          this.infoMessage =
+            "Takk! Vi har sendt deg en verifikasjons-epost. Vennligs bekreft e-posten din innen de neste 3 dagene.";
+        } else if (this.isSuccess === false) {
+          this.infoMessage =
+            "Beklager, det oppstod en feil. Vennligst prøv igjen senere eller send oss en e-post direkte.";
+        }
+      }, 550);
     },
   },
 };
 </script>
 <template>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close"
+  />
   <form @submit.prevent="submitForm" class="form">
     <div>
       <input
         type="text"
         id="name"
+        name="name"
         v-model="formData.name"
         required
         class="input"
@@ -81,6 +99,7 @@ export default {
       <input
         type="email"
         id="email"
+        name="email"
         v-model="formData.email"
         required
         class="input"
@@ -91,12 +110,18 @@ export default {
       <input
         type="tel"
         id="phone"
+        name="phone"
         v-model="formData.phone"
         class="input"
         placeholder="Telefon"
         @input="formData.phone = formData.phone.replace(/(?!^\+)[^0-9 ]/g, '')"
       />
-      <select id="occasion" v-model="formData.occasion" required>
+      <select
+        id="occasion"
+        name="occasion"
+        v-model="formData.occasion"
+        required
+      >
         <option value="" disabled hidden>Anledning*</option>
         <option value="eksempel 1">Eksempel 1</option>
         <option value="eksempel 2">Eksempel 2</option>
@@ -107,6 +132,7 @@ export default {
     <div>
       <textarea
         id="message"
+        name="message"
         class="message-input"
         rows="8"
         v-model="formData.message"
@@ -120,6 +146,15 @@ export default {
       :submitted="submitted"
       @spin-ended="onSpinEnded"
     />
+    <div v-if="infoMessage" class="info-message">
+      <span
+        class="material-symbols-outlined close-popup"
+        @click="infoMessage = ''"
+      >
+        close
+      </span>
+      {{ infoMessage }}
+    </div>
   </form>
 </template>
 
@@ -136,6 +171,7 @@ export default {
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  position: relative;
 }
 
 .form div {
@@ -203,5 +239,48 @@ select:invalid {
     order: 1;
     margin-bottom: 1rem;
   }
+}
+.info-message {
+  margin-top: 10px;
+  color: #000000;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  bottom: 23%;
+  left: 8%;
+  width: 50% !important;
+  background-color: #f4f4f4;
+  color: #114042;
+  padding: 18px 6px;
+  border: 1px solid #000000;
+}
+.info-message::before,
+.info-message::after {
+  content: "";
+  position: absolute;
+  left: 70%;
+  top: 100%;
+  border-top: 14px solid #f4f4f4;
+  border-bottom: none;
+  border-left: 17px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.info-message::before {
+  padding-top: 10px;
+  border-top-color: #000000;
+}
+
+.info-message::after {
+  margin-top: -0.6px;
+}
+
+.close-popup {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: 18px !important;
+  cursor: pointer;
+  color: #000000;
 }
 </style>

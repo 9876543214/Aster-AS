@@ -154,6 +154,7 @@ export default {
 }
 
 i {
+  margin-top: 2px;
   transition: 200ms;
   color: transparent;
   font-size: 18px;
