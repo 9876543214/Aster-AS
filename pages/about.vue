@@ -16,6 +16,7 @@ export default {
   />
   <Nav />
   <location />
+  <who />
 </template>
 
 <style>

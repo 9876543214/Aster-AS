@@ -3,12 +3,12 @@
     <h1>{{ breadcrumbs[breadcrumbs.length - 1].label }}</h1>
     <div class="path">
       <span
-        v-for="(crumb, idx) in breadcrumbs"
-        :key="idx"
+        v-for="(crumb, index) in breadcrumbs"
+        :key="index"
         class="breadcrumb-item"
       >
         <router-link
-          v-if="idx < breadcrumbs.length - 1"
+          v-if="index < breadcrumbs.length - 1"
           :to="crumb.path"
           class="breadcrumb-link"
         >
@@ -16,7 +16,7 @@
         </router-link>
         <span v-else class="breadcrumb-current">{{ crumb.label }}</span>
         <span
-          v-if="idx < breadcrumbs.length - 1"
+          v-if="index < breadcrumbs.length - 1"
           class="breadcrumb-separator"
           aria-hidden="true"
         >
@@ -40,7 +40,7 @@ export default {
       let fullPath = "";
       return [
         { label: "Hjem", path: "/" },
-        ...paths.map((segment, idx) => {
+        ...paths.map((segment, index) => {
           fullPath += "/" + segment;
           return {
             label:
@@ -62,7 +62,7 @@ export default {
   position: relative;
   font-size: 14px;
   margin-bottom: 1rem;
-  height: 200px;
+  height: 170px;
   align-items: center;
   justify-content: center;
   background-color: #eae0e0;

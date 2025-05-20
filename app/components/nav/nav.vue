@@ -183,13 +183,13 @@ export default {
   justify-content: center;
   align-items: flex-end;
   position: fixed;
-  top: 18px;
-  right: 18px;
+  top: 0;
+  right: 0;
   z-index: 1001;
   background: white;
-  border-radius: 8px;
+  border-radius: 0 0 0 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  padding-right: 9px;
+  padding-right: 8px;
   width: 44px;
   height: 43px;
   padding-top: 3px;

@@ -76,14 +76,14 @@ body {
 
 .size {
   background-color: #000;
-  height: calc(100vh - 76px);
+  height: calc(100vh - 63.6px);
   max-height: calc(1000px - 460px + 10vw);
   position: relative;
 }
 
 #hero-image {
   width: 100vw;
-  min-width: 1920px;
+  min-width: 1620px;
   min-height: 1080px;
 }
 
