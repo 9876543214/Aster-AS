@@ -15,16 +15,35 @@
           class="nav-links-hamburger"
           :class="{ 'nav-links-active': isMenuActive }"
         >
-          <li><a class="link" href="#home">Hjem</a></li>
-          <li><a class="link" href="#about">Om oss</a></li>
-          <li><a class="link" href="#contact">Kontakt</a></li>
+          <li><a class="link" href="">Hjem</a></li>
+          <li><a class="link" href="/about">Om oss</a></li>
+          <li><a class="link" href="/contact">Kontakt</a></li>
         </div>
       </div>
       <ul class="nav-links">
-        <li><a class="link" href="#home">Hjem</a></li>
-        <li><a class="link" href="#about">Om oss</a></li>
-        <li><a class="link" href="#contact">Kontakt</a></li>
+        <li><a class="link" href="">Hjem</a></li>
+        <li><a class="link" href="/about">Om oss</a></li>
+        <li><a class="link" href="/contact">Kontakt</a></li>
       </ul>
+      <div
+        v-if="showFixedHamburger"
+        class="hamburger fixed"
+        @click="isMenuActive = !isMenuActive"
+      >
+        <input type="checkbox" v-model="isMenuActive" style="display: none" />
+        <span :class="{ active: isMenuActive }"></span>
+        <span :class="{ active: isMenuActive }"></span>
+        <span :class="{ active: isMenuActive }"></span>
+        <div
+          class="nav-links-hamburger"
+          :class="{ 'nav-links-active': isMenuActive }"
+          @click.stop
+        >
+          <li><a class="link" href="">Hjem</a></li>
+          <li><a class="link" href="/about">Om oss</a></li>
+          <li><a class="link" href="/contact">Kontakt</a></li>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
@@ -34,11 +53,21 @@ export default {
   data() {
     return {
       isMenuActive: false,
+      showFixedHamburger: false,
     };
   },
-  watch: {
-    isMenuActive(newValue) {
-      console.log("isMenuActive changed:", newValue);
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      const navbar = this.$el;
+      const rect = navbar.getBoundingClientRect();
+      this.showFixedHamburger = rect.bottom <= 0;
+      if (!this.showFixedHamburger) this.isMenuActive = false;
     },
   },
 };
@@ -46,13 +75,15 @@ export default {
 
 <style scoped>
 .navbar {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.6rem;
+  padding: 0.3rem;
   background-color: #ffffff;
   color: #000000;
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 40px rgba(18, 13, 13, 0.25);
+  z-index: 1000;
 }
 
 .nav-content {
@@ -63,7 +94,7 @@ export default {
 }
 
 .logo img {
-  height: 45px;
+  height: 41px;
 }
 
 .hamburger {
@@ -123,7 +154,7 @@ export default {
   list-style: none;
   display: flex;
   gap: 2rem;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .link {
@@ -144,6 +175,46 @@ export default {
 }
 .link:hover::after {
   width: 100%;
+}
+
+.hamburger.fixed {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+  background: white;
+  border-radius: 0 0 0 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding-right: 8px;
+  width: 44px;
+  height: 43px;
+  padding-top: 3px;
+}
+.hamburger.fixed .nav-links-hamburger {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 0.2rem;
+  padding: 8px 24px 10px 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 1002;
+}
+.hamburger.fixed .nav-links-hamburger.nav-links-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 @media (max-width: 610px) {
@@ -170,7 +241,7 @@ export default {
   }
   .link {
     margin: 0;
-    font-size: calc(14px + 0.4vw);
+    font-size: calc(13px + 0.4vw);
     width: min-content;
   }
 

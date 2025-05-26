@@ -57,7 +57,7 @@ onMounted(() => {
           id="truck"
         />
         <div>
-          <h2>Logistikk & distrubisjon</h2>
+          <h2>Logistikk & distribisjon</h2>
           <p>Effektivisering og målrettet forbedring av verdikjeder</p>
         </div>
       </div>
@@ -149,8 +149,8 @@ onMounted(() => {
   transform: translateY(0);
 }
 
-@media screen and (max-width: 1100px) {
-  .choose-content {
+@media screen and (max-width: 1200px) {
+  .services-content {
     gap: 5%;
   }
 }

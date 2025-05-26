@@ -1,15 +1,22 @@
 <script setup>
+// Import onMounted lifecycle hook from Vue
 import { onMounted } from "vue";
 
+// Use onMounted to run code after the component is mounted
 onMounted(() => {
+  // Check if IntersectionObserver is supported
   if ("IntersectionObserver" in window) {
+    // Create a new IntersectionObserver instance
     const observer = new IntersectionObserver(
       (entries, observer) => {
+        // Loop through observed entries
         entries.forEach((entry) => {
+          // If the element is in the viewport
           if (entry.isIntersecting) {
             // Reset transform to translateY(0) when the .show class is added
             entry.target.style.transform = "translateY(0)";
             entry.target.classList.add("show");
+            // Stop observing this element
             observer.unobserve(entry.target);
           }
         });
@@ -17,9 +24,10 @@ onMounted(() => {
       { threshold: 0 }
     );
 
+    // Select all elements with the pop-up-element-choose class
     const elements = document.querySelectorAll(".pop-up-element-choose");
     elements.forEach((element) => {
-      // Generate random delay between 0.1s and 0.5s
+      // Generate random delay between 0.1s and 0.5s for the transition
       const randomDelay = (Math.random() * 0.2 + 0.1).toFixed(2);
       element.style.transitionDelay = `${randomDelay}s`;
 
@@ -27,6 +35,7 @@ onMounted(() => {
       const randomDistance = Math.random() * 100 + 150;
       element.style.transform = `translateY(${randomDistance}px)`;
 
+      // Observe the element for intersection
       observer.observe(element);
     });
   }
@@ -34,11 +43,13 @@ onMounted(() => {
 </script>
 
 <template>
+  <!-- Main container for the choose section -->
   <div class="choose">
     <div class="choose-header">
       <h1>Hvorfor velge Aster?</h1>
     </div>
     <div class="choose-content">
+      <!-- First pop-up element: Stjernekonsulenter -->
       <div class="stjernekonsulenter pop-up-element-choose">
         <div class="img">
           <img src="/images/icons/star_icon.svg" alt="stjerne ikon" id="star" />
@@ -48,6 +59,7 @@ onMounted(() => {
           <p>Erfarne konsulenter med både teknisk og økonomisk ekspertise</p>
         </div>
       </div>
+      <!-- Second pop-up element: Resultatorientert -->
       <div class="resultat pop-up-element-choose">
         <div class="img">
           <img
@@ -61,6 +73,7 @@ onMounted(() => {
           <p>Vi leverer tjenester av høy kvalitet til riktig tid og kostnad</p>
         </div>
       </div>
+      <!-- Third pop-up element: Bransjekompetanse -->
       <div class="kompetanse pop-up-element-choose">
         <div class="img">
           <img src="/images/icons/cogs_icon.svg" alt="tannhjul ikon" id="cog" />
@@ -75,6 +88,7 @@ onMounted(() => {
 </template>
 
 <style>
+/* Main container styling */
 .choose {
   display: flex;
   flex-direction: column;
@@ -84,6 +98,7 @@ onMounted(() => {
   margin-bottom: 3rem;
   margin-top: 6rem;
 }
+/* Layout for the content area */
 .choose-content {
   display: flex;
   flex-direction: row;
@@ -93,6 +108,7 @@ onMounted(() => {
   width: 100vw;
   justify-content: center;
 }
+/* Each pop-up element container */
 .choose-content div {
   display: flex;
   flex-direction: column;
@@ -100,12 +116,14 @@ onMounted(() => {
   justify-content: end;
   width: 300px;
 }
+/* Inner content containers */
 .choose-content div div {
   display: flex;
   flex-direction: column;
   row-gap: 0;
   border-radius: 10px;
 }
+/* Styling for the three content blocks */
 .stjernekonsulenter-content,
 .resultat-content,
 .kompetanse-content {
@@ -119,6 +137,7 @@ onMounted(() => {
   background-color: #1a237e;
   color: white;
 }
+/* Headings styling */
 .choose-content h2 {
   font-size: 20px;
   white-space: nowrap;
@@ -126,11 +145,13 @@ onMounted(() => {
   margin-bottom: 0.9rem;
 }
 
+/* Paragraph styling */
 .choose-content p {
   font-size: 14px;
   margin-top: 0;
   width: 245px;
 }
+/* Image container styling */
 .img {
   margin: 1rem;
   display: flex;
@@ -138,6 +159,7 @@ onMounted(() => {
   width: 200px;
   align-items: center;
 }
+/* Icon sizes */
 #star {
   width: 75px;
   height: 75px;
@@ -150,6 +172,7 @@ onMounted(() => {
   width: 75px;
   height: 75px;
 }
+/* Animation initial state */
 .pop-up-element-choose {
   opacity: 0;
   transform: translateY(200px);
@@ -157,12 +180,14 @@ onMounted(() => {
   will-change: transform, opacity;
 }
 
+/* Animation final state when shown */
 .pop-up-element-choose.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-@media screen and (max-width: 1100px) {
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
   .choose-content {
     gap: 5%;
   }
