@@ -152,4 +152,13 @@ p {
     display: none;
   }
 }
+
+@media (max-width: 430px) {
+  .hero-content {
+    width: 100%;
+  }
+  .left {
+    margin-left: 10px;
+  }
+}
 </style>

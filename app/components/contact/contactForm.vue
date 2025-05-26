@@ -1,10 +1,13 @@
 <script>
+// Import the custom SubmitButton component
 import SubmitButton from "./submitButton.vue";
 
 export default {
+  // Register the SubmitButton component
   components: { SubmitButton },
   data() {
     return {
+      // Holds the form input values
       formData: {
         name: "",
         email: "",
@@ -12,14 +15,20 @@ export default {
         phone: "",
         occasion: "",
       },
+      // Indicates if the form is currently submitting
       isSubmitting: false,
+      // Indicates if the submission was successful or not (null = not submitted)
       isSuccess: null,
+      // Used to trigger animation on the submit button
       submitted: false,
+      // Message to display to the user after submission
       infoMessage: "",
     };
   },
   methods: {
+    // Handles form submission
     async submitForm() {
+      // Validate required fields
       if (
         !this.formData.name ||
         !this.formData.email ||
@@ -32,6 +41,7 @@ export default {
 
       this.infoMessage = "";
 
+      // Prevent double submission
       if (this.isSubmitting) return;
 
       this.isSubmitting = true;
@@ -40,14 +50,17 @@ export default {
       this.submitted = false;
 
       try {
+        // Send form data to the backend API
         const response = await fetch(`/api/send-email`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(this.formData),
         });
 
+        // Store the result for later use in animation callback
         this.pendingSuccess = response.ok;
         if (response.ok) {
+          // Reset form fields on success
           this.formData = {
             name: "",
             email: "",
@@ -57,16 +70,21 @@ export default {
           };
         }
       } catch (error) {
+        // Log and handle errors
         console.error("Error sending email:", error);
         this.pendingSuccess = false;
       }
     },
+    // Called when the submit button animation ends
     onSpinEnded() {
       this.isSuccess = this.pendingSuccess;
       this.isSubmitting = false;
       this.submitted = true;
+      // Reset submitted state after 2 seconds
       setTimeout(() => (this.submitted = false), 2000);
+      // Reset isSuccess after 2 seconds
       setTimeout(() => (this.isSuccess = null), 2000);
+      // Show info message after animation
       setTimeout(() => {
         if (this.isSuccess) {
           this.infoMessage =
@@ -81,12 +99,15 @@ export default {
 };
 </script>
 <template>
+  <!-- Google Material Symbols stylesheet for close icon -->
   <link
     rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close"
   />
+  <!-- Contact form -->
   <form @submit.prevent="submitForm" class="form">
     <div>
+      <!-- Name input (required) -->
       <input
         type="text"
         id="name"
@@ -96,6 +117,7 @@ export default {
         class="input"
         placeholder="Navn*"
       />
+      <!-- Email input (required) -->
       <input
         type="email"
         id="email"
@@ -107,6 +129,7 @@ export default {
       />
     </div>
     <div>
+      <!-- Phone input (optional, only allows numbers, spaces, and leading +) -->
       <input
         type="tel"
         id="phone"
@@ -116,6 +139,7 @@ export default {
         placeholder="Telefon"
         @input="formData.phone = formData.phone.replace(/(?!^\+)[^0-9 ]/g, '')"
       />
+      <!-- Occasion select (required) -->
       <select
         id="occasion"
         name="occasion"
@@ -130,6 +154,7 @@ export default {
       </select>
     </div>
     <div>
+      <!-- Message textarea (required) -->
       <textarea
         id="message"
         name="message"
@@ -140,12 +165,14 @@ export default {
         placeholder="Melding*"
       ></textarea>
     </div>
+    <!-- Custom submit button with animation and status -->
     <SubmitButton
       :isSubmitting="isSubmitting"
       :isSuccess="isSuccess"
       :submitted="submitted"
       @spin-ended="onSpinEnded"
     />
+    <!-- Info message popup shown after submission -->
     <div v-if="infoMessage" class="info-message">
       <span
         class="material-symbols-outlined close-popup"
@@ -160,6 +187,7 @@ export default {
 
 
 <style>
+/* Main form container styling */
 .form {
   display: flex;
   width: 500px;
@@ -174,6 +202,7 @@ export default {
   position: relative;
 }
 
+/* Layout for each row of inputs */
 .form div {
   display: flex;
   width: 85%;
@@ -182,6 +211,7 @@ export default {
   gap: 20px;
 }
 
+/* Input and select styling */
 .form input,
 .form select {
   width: 100%;
@@ -194,17 +224,20 @@ export default {
   background-color: #ffffff00;
 }
 
+/* Select dropdown specific styling */
 .form select {
   cursor: pointer;
   height: 43.343px;
   width: 103.724%;
 }
 
+/* Placeholder color for invalid select */
 select:invalid {
   color: #757575;
   z-index: 100;
 }
 
+/* Textarea styling */
 .form textarea {
   width: 100%;
   font-family: lato;
@@ -216,12 +249,14 @@ select:invalid {
   background-color: #ffffff00;
 }
 
+/* Placeholder text styling */
 ::placeholder {
   color: #757575;
   font-family: lato;
   font-size: 13px;
 }
 
+/* Responsive styles for smaller screens */
 @media screen and (max-width: 830px) {
   .form {
     width: 400px;
@@ -240,6 +275,8 @@ select:invalid {
     margin-bottom: 1rem;
   }
 }
+
+/* Info message popup styling */
 .info-message {
   margin-top: 10px;
   color: #000000;
@@ -254,6 +291,8 @@ select:invalid {
   padding: 18px 6px;
   border: 1px solid #000000;
 }
+
+/* Arrow styling for info message popup */
 .info-message::before,
 .info-message::after {
   content: "";
@@ -275,6 +314,7 @@ select:invalid {
   margin-top: -0.6px;
 }
 
+/* Close icon styling for info message */
 .close-popup {
   position: absolute;
   right: 5px;
