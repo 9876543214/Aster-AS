@@ -121,7 +121,6 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   row-gap: 0;
-  border-radius: 10px;
 }
 /* Styling for the three content blocks */
 .stjernekonsulenter-content,
@@ -129,13 +128,11 @@ onMounted(() => {
 .kompetanse-content {
   display: flex;
   flex-direction: column;
-  align-items: start !important;
-  border-radius: 10px;
   padding: 1rem;
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
-  background-color: #1a237e;
-  color: white;
+  background-color: #1a237e00;
+  color: rgb(0, 0, 0);
 }
 /* Headings styling */
 .choose-content h2 {

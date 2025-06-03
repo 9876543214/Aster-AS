@@ -1,8 +1,3 @@
-<script>
-export default {
-  name: "AboutPage",
-};
-</script>
 <template>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,6 +12,7 @@ export default {
   <Nav />
   <location />
   <who />
+  <experience />
 </template>
 
 <style>
@@ -32,5 +28,8 @@ h1,
 h2,
 h3 {
   font-family: "Montserrat";
+}
+p {
+  font-weight: 350;
 }
 </style>

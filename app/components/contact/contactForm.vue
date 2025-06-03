@@ -272,7 +272,6 @@ select:invalid {
 @media screen and (max-width: 560px) {
   .form {
     order: 1;
-    margin-bottom: 1rem;
   }
 }
 

@@ -18,7 +18,19 @@
         </p>
         <div class="buttons">
           <div class="btn fill">Om oss</div>
-          <div class="btn">Kontakt</div>
+          <a href="/contact" class="btn btn-1">
+            <svg>
+              <rect
+                x="0"
+                y="0"
+                fill="none"
+                width="100%"
+                height="100%"
+                rx="0px"
+              />
+            </svg>
+            Kontakt
+          </a>
         </div>
       </div>
       <div class="right">
@@ -116,7 +128,7 @@ h1 {
 p {
   margin-top: 34px;
   font-family: lato;
-  font-size: calc(12px + 0.3vw);
+  font-size: calc(10px + 0.3vw);
   width: calc(295px + 7.5vw);
 }
 
@@ -128,13 +140,13 @@ p {
 
 .btn {
   background-color: transparent;
-  border: 1px solid #000;
   border-radius: 7.5px;
   padding: 12px 24px;
   color: #333;
   font-size: 15px;
   cursor: pointer;
-  transition: color 0.5s, transform 0.2s, background-color 0.3s;
+  text-decoration: none;
+  transition: 0.5s;
 }
 
 .fill {
@@ -160,5 +172,36 @@ p {
   .left {
     margin-left: 10px;
   }
+}
+.btn-1 {
+  position: relative;
+}
+
+.btn-1 svg {
+  height: 45px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.btn-1 rect {
+  fill: none;
+  stroke: #000000;
+  stroke-width: 2;
+  stroke-dasharray: 422, 0;
+  transition: all 0.35s linear;
+}
+
+.btn-1:hover {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.btn-1:hover rect {
+  stroke-width: 4;
+  stroke-dasharray: 15, 310;
+  stroke-dashoffset: 88;
+  transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
 }
 </style>

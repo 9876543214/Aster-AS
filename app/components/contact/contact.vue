@@ -2,7 +2,7 @@
   <ContactHeader />
   <div class="contact">
     <ContactInfo />
-    <div class="form">
+    <div class="formcontainer">
       <ContactForm />
       <p id="infomessage">
         Ved å sende inn skjemaet samtykker du til at vi lagrer navn og e-post
@@ -23,9 +23,10 @@
   align-items: center;
 }
 
-.form {
+.formcontainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #infomessage {
@@ -34,11 +35,25 @@
   margin-top: 10px;
   text-align: center;
   order: 1;
+  width: 490px;
+}
+@media screen and (max-width: 830px) {
+  #infomessage {
+    width: 390px;
+  }
 }
 
+@media screen and (max-width: 710px) {
+  #infomessage {
+    width: 290px;
+  }
+}
 @media screen and (max-width: 560px) {
   .contact {
     flex-direction: column;
+  }
+  #infomessage {
+    margin-bottom: 2rem;
   }
 }
 </style>
