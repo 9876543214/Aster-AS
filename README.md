@@ -1,6 +1,8 @@
 # Aster Website
 
-This repository contains the source code for the official website of **Aster**, a small company specializing in IT consulting and logistics The website is built using **Nuxt 3** and **Vue.js** and includes features such as a contact form, customer showcase, and responsive design.
+This repository contains the source code for the official website of **Aster**, a small company specializing in IT consulting and logistics The website is built using **Nuxt 3** and **Vue.js** and includes features such as a contact form, customer showcase, and responsive design. I have done everything from planning and designing to coding and testing this website.
+
+(PS: I am not responisble for the choice of images, fonts, and colors)
 
 ## Table of Contents
 
