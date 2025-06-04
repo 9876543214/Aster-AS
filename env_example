@@ -66,3 +66,15 @@ DEFAULT_DB_WRITE_USER=
 
 # Password for the default database write user (can be left empty)
 DEFAULT_DB_WRITE_PASS=
+
+# Default read-only user for the consultantss database
+CONSULTANTS_DB_READ_USER=
+
+# Password for the consultants database read-only user (can be left empty)
+CONSULTANTS_DB_READ_PASS=
+
+# Default write user for the consultants database
+CONSULTANTS_DB_WRITE_USER=
+
+# Password for the consultants database write user (can be left empty)
+CONSULTANTS_DB_WRITE_PASS=

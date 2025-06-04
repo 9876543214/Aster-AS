@@ -108,19 +108,19 @@ onMounted(() => {
   padding: 1rem;
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
-  background-color: #1a237e;
 }
 .services-content h2 {
   font-size: 20px;
   white-space: nowrap;
-  color: white;
+  color: rgb(0, 0, 0);
   margin-bottom: 0.9rem;
 }
 
 .services-content p {
   font-size: 14px;
   margin-top: 0;
-  color: white;
+  color: rgb(0, 0, 0);
+  font-weight: 390;
 }
 
 #key {

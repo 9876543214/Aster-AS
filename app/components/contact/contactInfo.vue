@@ -1,14 +1,10 @@
 <template>
-  <!-- Contact information container -->
   <div class="contact-info">
-    <!-- Loop through each contact detail and render its info -->
     <div v-for="info in contactDetails" :key="info.title" class="info-item">
       <div class="icon">
-        <!-- Display the icon for each contact method -->
         <img :src="info.icon" :alt="info.alt" class="icon" />
       </div>
       <div class="text">
-        <!-- Display the title and content for each contact method -->
         <h2>{{ info.title }}</h2>
         <p v-html="info.content"></p>
       </div>
@@ -17,7 +13,6 @@
 </template>
 
 <script>
-// Vue component for displaying contact information
 export default {
   data() {
     return {
@@ -83,25 +78,12 @@ p {
 
 /* Responsive styles for different screen sizes */
 @media screen and (max-width: 830px) {
-  .phone,
-  .email,
-  .address {
-    width: 150px;
-    height: 65px;
-    padding-top: 1rem;
-  }
   .contact-info {
     gap: 2rem;
   }
 }
 
 @media screen and (max-width: 710px) {
-  .phone,
-  .email,
-  .address {
-    padding-top: 0.8rem;
-    padding-bottom: 0.2rem;
-  }
 }
 @media screen and (max-width: 560px) {
   .contact-info {
@@ -111,15 +93,6 @@ p {
     width: 100vw;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .phone,
-  .email,
-  .address {
-    border: none;
-    padding: none;
-    width: min-content;
-    white-space: nowrap;
-    margin: 0;
   }
 }
 </style>

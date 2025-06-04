@@ -4,7 +4,7 @@
       <img src="/images/logos/logo-color.svg" alt="Aster Logo" class="logo" />
     </header>
     <main class="content">
-      <h1>Epost verifikasjon</h1>
+      <h1 id="verification-header">Epost verifikasjon</h1>
       <p v-if="loading" class="message loading">Verifiserer din epost...</p>
       <p v-if="success" class="message success">Din epost er verifisert!</p>
       <p v-if="error" class="message error">{{ error }}</p>
@@ -84,7 +84,7 @@ export default {
   width: 100%;
 }
 
-h1 {
+#verification-header {
   font-family: "Montserrat", sans-serif;
   font-size: 24px;
   margin-bottom: 20px;

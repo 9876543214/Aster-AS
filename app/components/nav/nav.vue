@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="nav-content">
       <div class="logo">
-        <a href="#home">
+        <a href="/">
           <img src="/images/logos/logo-color.svg" alt="Logo" />
         </a>
       </div>
@@ -15,13 +15,13 @@
           class="nav-links-hamburger"
           :class="{ 'nav-links-active': isMenuActive }"
         >
-          <li><a class="link" href="">Hjem</a></li>
+          <li><a class="link" href="/">Hjem</a></li>
           <li><a class="link" href="/about">Om oss</a></li>
           <li><a class="link" href="/contact">Kontakt</a></li>
         </div>
       </div>
       <ul class="nav-links">
-        <li><a class="link" href="">Hjem</a></li>
+        <li><a class="link" href="/">Hjem</a></li>
         <li><a class="link" href="/about">Om oss</a></li>
         <li><a class="link" href="/contact">Kontakt</a></li>
       </ul>
@@ -39,7 +39,7 @@
           :class="{ 'nav-links-active': isMenuActive }"
           @click.stop
         >
-          <li><a class="link" href="">Hjem</a></li>
+          <li><a class="link" href="/">Hjem</a></li>
           <li><a class="link" href="/about">Om oss</a></li>
           <li><a class="link" href="/contact">Kontakt</a></li>
         </div>
@@ -253,6 +253,18 @@ export default {
   .nav-links-hamburger.nav-links-active {
     opacity: 1;
     transform: translateY(0px);
+  }
+  .logo img {
+    height: 35px;
+  }
+  .hamburger.fixed {
+    width: 43px;
+    height: 37px;
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-right: 5px;
+    border-radius: 0 0 0 6px;
   }
 }
 </style>

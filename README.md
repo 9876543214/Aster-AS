@@ -10,7 +10,7 @@ This repository contains the source code for the official website of **Aster**, 
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
-   (Note: Project isnt finished, so the setup will not work properly yet)
+   (Note: Project isnt finished, so the setup might not work properly)
 - [Folder Structure](#folder-structure)
 
 ---
@@ -35,7 +35,8 @@ This repository contains the source code for the official website of **Aster**, 
 - **MySQL**: Database for storing email confirmations.
 - **EJS**: Templating engine for email templates.
 - **FontAwesome**: Icons for UI elements.
-- **SCSS/CSS**: Styling.
+- **CSS**: Styling.
+
 
 ---
 
@@ -168,4 +169,7 @@ This repository contains the source code for the official website of **Aster**, 
 ---
 
 ## Folder Structure
+
+
+Work in progress
 
