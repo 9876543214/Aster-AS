@@ -37,6 +37,7 @@ This repository contains the source code for the official website of **Aster**, 
 - **FontAwesome**: Icons for UI elements.
 - **CSS**: Styling.
 
+
 ---
 
 ## Prerequisites
@@ -169,4 +170,6 @@ This repository contains the source code for the official website of **Aster**, 
 
 ## Folder Structure
 
+
 Work in progress
+
