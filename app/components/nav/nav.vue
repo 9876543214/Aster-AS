@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="nav-content">
       <div class="logo">
-        <a href="#home">
+        <a href="/">
           <img src="/images/logos/logo-color.svg" alt="Logo" />
         </a>
       </div>

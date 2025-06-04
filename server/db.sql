@@ -136,3 +136,19 @@ create TABLE if not exists `default_aster_work_content_text` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     content TEXT
 );
+
+create database if not exists `consultants` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+create user if not exists `{CONSULTANTS_DB_READ_USER}`@`%` identified by '{CONSULTANTS_DB_READ_PASS}';
+grant select on `consultants`.* to `{CONSULTANTS_DB_READ_USER}`@`%`;
+create user if not exists `{CONSULTANTS_DB_WRITE_USER}`@`%` identified by '{CONSULTANTS_DB_WRITE_PASS}';
+grant insert, update, delete, select on `consultants`.* to `{CONSULTANTS_DB_WRITE_USER}`@`%`;
+USE `consultants`;
+CREATE TABLE consultants (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    phone VARCHAR(20),
+    description TEXT,
+    title VARCHAR(255),
+    image_file_name VARCHAR(255),  
+);

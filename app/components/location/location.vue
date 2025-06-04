@@ -31,25 +31,49 @@
 export default {
   computed: {
     breadcrumbs() {
-      const pathMap = {
-        "": "Hjem",
-        about: "Om oss",
-        contact: "Kontakt oss",
+      const consultantId = this.$route.query.id;
+      const consultantNames = {
+        0: "Ruth Elisabeth Bakken",
+        1: "Anne Sofie Nordvik",
       };
+
+      const consultantName = consultantId
+        ? consultantNames[consultantId]
+        : null;
+
       const paths = this.$route.path.split("/").filter(Boolean);
       let fullPath = "";
-      return [
-        { label: "Hjem", path: "/" },
-        ...paths.map((segment, index) => {
-          fullPath += "/" + segment;
-          return {
-            label:
-              pathMap[segment] ||
-              segment.charAt(0).toUpperCase() + segment.slice(1),
-            path: fullPath,
-          };
-        }),
-      ];
+      let crumbs = [{ label: "Hjem", path: "/" }];
+
+      // Hvis vi er på consultantDetails, legg til "Om oss"
+      if (paths.includes("consultantDetails")) {
+        crumbs.push({ label: "Om oss", path: "/about" });
+        crumbs.push({
+          label: consultantName || "Konsulent",
+          path:
+            "/about/consultantDetails" +
+            (consultantId ? `?id=${consultantId}` : ""),
+        });
+      } else {
+        // Standard breadcrumb-bygging
+        crumbs = [
+          { label: "Hjem", path: "/" },
+          ...paths.map((segment, index) => {
+            fullPath += "/" + segment;
+            let label =
+              segment === "about"
+                ? "Om oss"
+                : segment === "contact"
+                ? "Kontakt oss"
+                : segment.charAt(0).toUpperCase() + segment.slice(1);
+            return {
+              label,
+              path: fullPath,
+            };
+          }),
+        ];
+      }
+      return crumbs;
     },
   },
 };
@@ -62,7 +86,7 @@ export default {
   position: relative;
   font-size: 14px;
   margin-bottom: 1rem;
-  height: 170px;
+  height: 190px;
   align-items: center;
   justify-content: center;
   background-color: #eae0e0;
@@ -75,6 +99,13 @@ export default {
   color: #000000;
   text-decoration: none;
   height: min-content;
+}
+
+.breadcrumb-link,
+.breadcrumb-current {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0 0.1em;
 }
 h1 {
   font-size: 1.9rem;

@@ -11,10 +11,10 @@
       </div>
       <div class="footer-2">
         <h2>Nyttige lenker</h2>
-        <a href="#home">Hjem</a>
-        <a href="#about">Om oss</a>
-        <a href="#work">Jobb hos oss</a>
-        <a href="#contact">Kontakt</a>
+        <a href="/">Hjem</a>
+        <a href="/about">Om oss</a>
+        <a href="/work">Jobb hos oss</a>
+        <a href="/contact">Kontakt</a>
       </div>
       <div class="footer-3">
         <h2>Kontakt</h2>

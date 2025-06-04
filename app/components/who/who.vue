@@ -49,7 +49,7 @@
   margin-bottom: 1rem;
 }
 .who div {
-  height: 265px;
+  height: 269px;
 }
 .who p {
   font-size: 14.4px;
@@ -59,7 +59,7 @@
 .who-left {
   display: flex;
   justify-content: right;
-  margin-top: 7px;
+  margin-top: 5px;
 }
 
 .who-image {
@@ -169,7 +169,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0rem;
-    margin-top: 4rem;
+    margin-top: 3.5rem;
     margin-left: -0.5rem;
   }
   .who p {
@@ -185,7 +185,7 @@
     align-items: center;
   }
   .who-right div {
-    width: 94%;
+    width: 92%;
     height: fit-content !important;
   }
   .who-left {
@@ -198,7 +198,7 @@
     margin-top: 2rem;
   }
   .who-image {
-    width: 94%;
+    width: 92%;
     height: auto;
     object-fit: cover;
     object-position: top;

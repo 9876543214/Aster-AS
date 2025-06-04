@@ -10,7 +10,7 @@ This repository contains the source code for the official website of **Aster**, 
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
-   (Note: Project isnt finished, so the setup will not work properly yet)
+   (Note: Project isnt finished, so the setup might not work properly)
 - [Folder Structure](#folder-structure)
 
 ---

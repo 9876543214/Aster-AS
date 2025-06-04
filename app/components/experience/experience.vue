@@ -39,7 +39,7 @@
   margin-top: 5rem;
   gap: 6rem;
   min-height: 100px;
-  margin-bottom: 50rem;
+  margin-bottom: 5rem;
   margin-top: 7rem;
   margin-left: -2.8rem;
 }
@@ -166,7 +166,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0rem;
-    margin-top: 4rem;
+    margin-top: -3rem;
     margin-left: -0.5rem;
   }
   .experience-left {
@@ -178,7 +178,7 @@
     align-items: center;
   }
   .experience-left div {
-    width: 94%;
+    width: 92%;
     height: fit-content !important;
   }
   .experience-right {

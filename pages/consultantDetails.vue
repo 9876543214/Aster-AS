@@ -15,9 +15,7 @@
   />
   <Nav />
   <location />
-  <who />
-  <experience />
-  <consultants />
+  <consultant-details-component />
   <Footer />
 </template>
 
