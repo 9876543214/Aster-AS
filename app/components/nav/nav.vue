@@ -189,7 +189,8 @@ export default {
   background: white;
   border-radius: 0 0 0 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  padding-right: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
   width: 44px;
   height: 43px;
   padding-top: 3px;

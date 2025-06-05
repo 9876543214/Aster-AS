@@ -21,6 +21,15 @@
   <Footer />
 </template>
 
+<script>
+const dialog = ref(false);
+export default {
+  methods: {
+    openLoginDialog() {},
+  },
+};
+</script>
+
 <style>
 body {
   width: 100vw;

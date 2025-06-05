@@ -40,4 +40,7 @@ h2,
 h3 {
   font-family: "Montserrat";
 }
+p {
+  font-weight: 400;
+}
 </style>
