@@ -53,7 +53,7 @@ export default {
 .info-item {
   display: flex;
   width: 205px;
-  height: 60px;
+  height: 90px;
   border: 1px solid rgb(59, 59, 59);
   flex-direction: row;
   padding: 1rem;
@@ -78,12 +78,25 @@ p {
 
 /* Responsive styles for different screen sizes */
 @media screen and (max-width: 830px) {
+  .phone,
+  .email,
+  .address {
+    width: 150px;
+    height: 65px;
+    padding-top: 1rem;
+  }
   .contact-info {
     gap: 2rem;
   }
 }
 
 @media screen and (max-width: 710px) {
+  .phone,
+  .email,
+  .address {
+    padding-top: 0.8rem;
+    padding-bottom: 0.2rem;
+  }
 }
 @media screen and (max-width: 560px) {
   .contact-info {
@@ -93,6 +106,15 @@ p {
     width: 100vw;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .phone,
+  .email,
+  .address {
+    border: none;
+    padding: none;
+    width: min-content;
+    white-space: nowrap;
+    margin: 0;
   }
 }
 </style>

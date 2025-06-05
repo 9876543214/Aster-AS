@@ -5,8 +5,8 @@
     <div class="formcontainer">
       <ContactForm />
       <p id="infomessage">
-        Ved å sende inn skjemaet samtykker du til at vi lagrer navn og e-post
-        for å kunne kontakte deg tilbake.
+        Ved å sende inn skjemaet samtykker du til at vi lagrer fylt inn data for
+        å kunne kontakte deg tilbake.
       </p>
     </div>
   </div>
