@@ -1,211 +1,120 @@
 <template>
-  <div class="experience">
-    <div class="experience-left">
-      <div>
-        <h1>Erfarne konsulenter</h1>
-        <p class="experience-text">
+  <section class="experience" ref="elRef" :class="{ visible: isVisible }">
+    <div class="container experience-inner">
+      <div class="experience-text">
+        <h2>Erfarne konsulenter</h2>
+        <p>
           Aster betyr stjerne, og våre stjernekonsulenter har som mål å skape
           verdi for kundene gjennom høy kvalitet og kostnadseffektive leveranser
           levert til riktig tid.
         </p>
-        <p class="experience-text">
+        <p>
           Vi bistår våre kunder med analyser, prosesser og prosjekter for å
           utvikle og forbedre virksomheten.
         </p>
-        <p class="experience-text">
+        <p>
           Hovedmålet vårt er å hjelpe kunden med å øke lønnsomhet og
           kundetilfredshet. Våre fagområder inkluderer outsourcing, ledelse,
           forretningsutvikling, IT-sikkerhet, økonomistyring og
           kvalitetssikring.
         </p>
       </div>
+      <div class="experience-image-wrapper">
+        <img
+          src="/images/website_images/experience_rope.jpg"
+          alt="Orange tau knyttet rundt stolpe — samarbeid og styrke"
+          class="experience-image"
+          loading="lazy"
+        />
+      </div>
     </div>
-    <div class="experience-right">
-      <img
-        src="\images\website_images\experience_image.png"
-        alt="Et spredt mønster med små stjerneformede konfettier"
-        class="experience-image"
-      />
-    </div>
-  </div>
+  </section>
 </template>
-<style>
+
+<script setup>
+import { useReveal } from "~/app/composables/useReveal";
+const { elRef, isVisible } = useReveal();
+</script>
+
+<style scoped>
 .experience {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  width: 100%;
-  margin-top: 5rem;
-  gap: 6rem;
-  min-height: 100px;
-  margin-bottom: 5rem;
-  margin-top: 7rem;
-  margin-left: -2.8rem;
-}
-.experience h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-.experience div {
-  height: 289px;
-}
-.experience p {
-  font-size: 14.4px;
-  line-height: 1.5;
+  padding: 5rem 0;
+  background: var(--color-surface);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.experience-right {
+.experience.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-inner {
   display: flex;
-  justify-content: right;
-  margin-top: 5px;
+  align-items: center;
+  gap: 4rem;
+}
+
+.experience-text {
+  flex: 1;
+}
+
+.experience-text h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.experience-text p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.experience-text p:last-child {
+  margin-bottom: 0;
+}
+
+.experience-image-wrapper {
+  flex-shrink: 0;
+  width: 40%;
+  max-width: 420px;
 }
 
 .experience-image {
-  max-height: 100%;
-  width: auto;
-  object-fit: contain;
-}
-.experience-left {
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-}
-.experience-text {
-  color: #000000;
-  margin-bottom: 0.6rem;
-  width: 480px;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
 }
 
-@media screen and (max-width: 950px) {
-  .experience {
-    gap: 4rem;
-    margin-left: -3.2rem;
+@media screen and (max-width: 1024px) {
+  .experience-inner {
+    gap: 2.5rem;
   }
 }
 
-@media screen and (max-width: 900px) {
-  .experience-text {
-    width: 320px;
-    margin-bottom: 0.5rem;
-  }
-  .experience div {
-    height: 292px;
-  }
-  .experience-left {
-    width: 320px;
-  }
-  .experience p {
-    font-size: 0.75rem;
-    line-height: 1.2;
-  }
-  .experience p {
-    font-size: 0.83rem;
-    line-height: 1.4;
-  }
-  .experience h1 {
-    font-size: 1.7rem;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .experience-text {
-    width: 280px;
-    margin-bottom: 0.3rem;
-  }
-  .experience div {
-    height: 273px;
-  }
+@media screen and (max-width: 768px) {
   .experience {
-    gap: 3rem;
-  }
-  .experience p {
-    font-size: 0.8rem;
-    line-height: 1.2;
-  }
-  .experience h1 {
-    font-size: 1.6rem;
-  }
-  .experience-left {
-    width: 280px;
-  }
-}
-@media screen and (max-width: 740px) {
-  .experience {
-    gap: 1rem;
-    margin-left: -0.9rem;
-    margin-top: 1rem;
+    padding: 3.5rem 0;
   }
 
-  .experience-left {
-    width: 250px;
-    margin-left: 1.6rem;
-  }
-  .experience-right {
-    width: 250px;
-    justify-content: left;
-  }
-  .experience div {
-    height: 226px;
-  }
-  .experience p {
-    font-size: 0.72rem;
-    line-height: 1.2;
-    width: 250px;
-  }
-  .experience h1 {
-    font-size: 1.43rem;
-    width: 240px;
-  }
-  .experience-text {
-    margin-bottom: 0.2rem;
-  }
-}
-@media screen and (max-width: 530px) {
-  .experience {
+  .experience-inner {
     flex-direction: column;
-    align-items: center;
-    gap: 0rem;
-    margin-top: -3rem;
-    margin-left: -0.5rem;
+    gap: 2rem;
   }
-  .experience-left {
+
+  .experience-image-wrapper {
     width: 100%;
-    height: fit-content !important;
-    margin-left: 0;
-    order: 1;
-    justify-content: center;
-    align-items: center;
+    max-width: none;
+    order: -1;
   }
-  .experience-left div {
-    width: 92%;
-    height: fit-content !important;
-  }
-  .experience-right {
-    order: 2;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    height: 220px !important;
-    overflow: hidden;
-    margin-top: 2rem;
-  }
+
   .experience-image {
-    width: auto;
-    height: 1000px;
-    object-fit: cover;
-    object-position: top;
-    margin-top: -3rem;
-    transform: rotate(-90deg);
-  }
-  .experience-text {
-    width: 100%;
-    margin-bottom: 0.1rem;
-  }
-  .experience p {
-    font-size: 0.8rem;
-    line-height: 1.25;
-    width: 100%;
+    height: 240px;
   }
 }
 </style>

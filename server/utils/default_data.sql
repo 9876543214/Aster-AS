@@ -30,7 +30,7 @@ INSERT into aster_index_content_images (file_name, folder_name) VALUES
 INSERT into aster_contact_content_text (content) VALUES
 ('Kontakt oss'),
 ('Ring oss'),
-('+47 123 45 678'),
+('+47 913 51 234'),
 ('Email oss'),
 ('kontakt@aster.no'),
 ('Besøk oss'),

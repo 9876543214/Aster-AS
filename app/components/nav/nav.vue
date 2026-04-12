@@ -1,88 +1,115 @@
 <template>
-  <nav class="navbar">
-    <div class="nav-content">
-      <div class="logo">
-        <a href="/">
-          <img src="/images/logos/logo-color.svg" alt="Logo" />
-        </a>
-      </div>
-      <div id="menuToggle" class="hamburger">
-        <input type="checkbox" v-model="isMenuActive" />
-        <span></span>
-        <span></span>
-        <span></span>
-        <div
-          class="nav-links-hamburger"
-          :class="{ 'nav-links-active': isMenuActive }"
-        >
-          <li><a class="link" href="/">Hjem</a></li>
-          <li><a class="link" href="/about">Om oss</a></li>
-          <li><a class="link" href="/contact">Kontakt</a></li>
-        </div>
-      </div>
+  <nav class="navbar" ref="navbarRef">
+    <div class="nav-content container">
+      <NuxtLink to="/" class="logo">
+        <img src="/images/logos/logo-color.svg" alt="Aster AS" />
+      </NuxtLink>
+
       <ul class="nav-links">
-        <li><a class="link" href="/">Hjem</a></li>
-        <li><a class="link" href="/about">Om oss</a></li>
-        <li><a class="link" href="/contact">Kontakt</a></li>
+        <li v-for="link in links" :key="link.to">
+          <NuxtLink :to="link.to" class="nav-link">{{ link.label }}</NuxtLink>
+        </li>
       </ul>
-      <div
-        v-if="showFixedHamburger"
-        class="hamburger fixed"
-        @click="isMenuActive = !isMenuActive"
+
+      <button
+        class="hamburger"
+        :class="{ open: isMenuOpen }"
+        @click="toggleMenu"
+        aria-label="Meny"
       >
-        <input type="checkbox" v-model="isMenuActive" style="display: none" />
-        <span :class="{ active: isMenuActive }"></span>
-        <span :class="{ active: isMenuActive }"></span>
-        <span :class="{ active: isMenuActive }"></span>
-        <div
-          class="nav-links-hamburger"
-          :class="{ 'nav-links-active': isMenuActive }"
-          @click.stop
-        >
-          <li><a class="link" href="/">Hjem</a></li>
-          <li><a class="link" href="/about">Om oss</a></li>
-          <li><a class="link" href="/contact">Kontakt</a></li>
-        </div>
-      </div>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+
+    <Transition name="dropdown">
+      <div v-if="isMenuOpen" class="mobile-menu" @click="isMenuOpen = false">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          class="mobile-link"
+        >
+          {{ link.label }}
+        </NuxtLink>
+      </div>
+    </Transition>
+
+    <!-- Fixed hamburger when scrolled past navbar -->
+    <Teleport to="body">
+      <Transition name="fade">
+        <button
+          v-if="showFixed"
+          class="hamburger fixed-hamburger"
+          :class="{ open: isMenuOpen }"
+          @click="toggleMenu"
+          aria-label="Meny"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+
+          <Transition name="dropdown">
+            <div v-if="isMenuOpen" class="fixed-dropdown" @click.stop="isMenuOpen = false">
+              <NuxtLink
+                v-for="link in links"
+                :key="link.to"
+                :to="link.to"
+                class="mobile-link"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </div>
+          </Transition>
+        </button>
+      </Transition>
+    </Teleport>
   </nav>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isMenuActive: false,
-      showFixedHamburger: false,
-    };
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      const navbar = this.$el;
-      const rect = navbar.getBoundingClientRect();
-      this.showFixedHamburger = rect.bottom <= 0;
-      if (!this.showFixedHamburger) this.isMenuActive = false;
-    },
-  },
-};
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+
+const links = [
+  { to: "/", label: "Hjem" },
+  { to: "/about", label: "Om oss" },
+  { to: "/work", label: "Jobb hos oss" },
+  { to: "/contact", label: "Kontakt" },
+];
+
+const isMenuOpen = ref(false);
+const showFixed = ref(false);
+const navbarRef = ref(null);
+
+function toggleMenu() {
+  isMenuOpen.value = !isMenuOpen.value;
+}
+
+function handleScroll() {
+  if (!navbarRef.value) return;
+  const rect = navbarRef.value.getBoundingClientRect();
+  const wasFixed = showFixed.value;
+  showFixed.value = rect.bottom <= 0;
+  if (wasFixed && !showFixed.value) {
+    isMenuOpen.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped>
 .navbar {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem;
-  background-color: #ffffff;
-  color: #000000;
-  box-shadow: 0px 4px 40px rgba(18, 13, 13, 0.25);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
   z-index: 1000;
 }
 
@@ -90,182 +117,183 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 92%;
+  height: 64px;
 }
 
 .logo img {
-  height: 41px;
+  height: 38px;
+  display: block;
 }
 
+/* Desktop links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.nav-link::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  width: 0;
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.router-link-exact-active::after {
+  width: 100%;
+}
+
+.nav-link.router-link-exact-active {
+  color: var(--color-accent);
+}
+
+/* Hamburger button */
 .hamburger {
   display: none;
-  position: relative;
-}
-
-.hamburger input {
-  opacity: 0;
-  position: absolute;
-  z-index: 2;
-  height: 100%;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 8px;
   cursor: pointer;
-  margin: 0;
+  z-index: 1001;
 }
 
 .hamburger span {
   display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  background: #3a3a3a;
-  border-radius: 3px;
-  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-}
-
-.hamburger span:nth-last-child(3) {
-  transform-origin: 0% 0%;
-}
-
-.hamburger span:nth-last-child(4) {
-  transform-origin: 0% 100%;
-}
-.hamburger span:nth-last-child(2) {
-  transform-origin: 0% 100%;
-}
-
-.hamburger input:checked ~ span {
-  opacity: 1;
-  transform: rotate(45deg) translate(-2px, -1px);
-  background: #3a3a3a;
-}
-
-.hamburger input:checked ~ span:nth-last-child(3) {
-  opacity: 0;
-  transform: rotate(0deg) scale(0.2, 0.2);
-}
-
-.hamburger input:checked ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(-1.6px, 3.5px);
-}
-
-.nav-links,
-.nav-links-hamburger {
-  list-style: none;
-  display: flex;
-  gap: 2rem;
-  font-size: 16px;
-}
-
-.link {
-  font-family: montserrat;
-  color: #000000;
-  text-decoration: none;
-  height: min-content;
-}
-
-.link::after {
-  transition: all ease-in-out 0.2s;
-  background: none repeat scroll 0 0 #000000;
-  content: "";
-  display: block;
+  width: 24px;
   height: 2px;
-  border-radius: 50px;
-  width: 0;
-}
-.link:hover::after {
-  width: 100%;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.hamburger.fixed {
-  display: flex !important;
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.mobile-link {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: none;
+  padding: 0.75rem var(--content-padding);
+  transition: background-color 0.15s ease;
+}
+
+.mobile-link:hover {
+  background: var(--color-bg);
+}
+
+.mobile-link.router-link-exact-active {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  font-weight: 600;
+}
+
+/* Fixed hamburger */
+.fixed-hamburger {
+  display: flex !important;
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 1001;
-  background: white;
-  border-radius: 0 0 0 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  padding-left: 4px;
-  padding-right: 4px;
+  z-index: 2000;
+  background: var(--color-surface);
+  border-radius: 0 0 0 var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  padding: 10px;
   width: 44px;
-  height: 43px;
-  padding-top: 3px;
-}
-.hamburger.fixed .nav-links-hamburger {
-  position: absolute;
-  top: 54px;
-  right: 0;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  border-radius: 0.2rem;
-  padding: 8px 24px 10px 10px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-10px);
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  z-index: 1002;
-}
-.hamburger.fixed .nav-links-hamburger.nav-links-active {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  height: 44px;
 }
 
-@media (max-width: 610px) {
+.fixed-dropdown {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Transitions */
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
   .nav-links {
     display: none;
   }
+
   .hamburger {
-    display: block;
-  }
-  .nav-links-hamburger {
     display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(-15px);
-    transition: all 0.5s;
-    border-radius: 0.2rem;
-    padding: 2px 30px 6px 10px;
-  }
-  .link {
-    margin: 0;
-    font-size: calc(13px + 0.4vw);
-    width: min-content;
   }
 
-  li {
-    width: min-content;
-    white-space: nowrap;
+  .mobile-menu {
+    display: flex;
   }
+}
 
-  .nav-links-hamburger.nav-links-active {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  .logo img {
-    height: 35px;
-  }
-  .hamburger.fixed {
-    width: 43px;
-    height: 37px;
-    padding-top: 0;
-    padding-left: 0;
-    padding-bottom: 0;
-    padding-right: 5px;
-    border-radius: 0 0 0 6px;
+@media screen and (min-width: 769px) {
+  .fixed-hamburger {
+    display: none !important;
   }
 }
 </style>

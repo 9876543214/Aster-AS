@@ -1,35 +1,51 @@
 <template>
-  <footer>
-    <div class="footer-content">
-      <div class="footer-1">
-        <h2>logo placeholder</h2>
-        <p>
-          Strategisk rådgivning og projektledelse <br />innen IT, telekom og
+  <footer class="site-footer">
+    <div class="footer-content container">
+      <div class="footer-section footer-about">
+        <img src="/images/logos/logo-white.svg" alt="Aster AS logo" class="footer-logo" />
+        <p class="tagline">
+          Strategisk rådgivning og prosjektledelse<br />innen IT, sikkerhet og
           logistikk
         </p>
       </div>
-      <div class="footer-2">
-        <h2>Nyttige lenker</h2>
-        <a href="/">Hjem</a>
-        <a href="/about">Om oss</a>
-        <a href="/work">Jobb hos oss</a>
-        <a href="/contact">Kontakt</a>
+      <div class="footer-section footer-links">
+        <h3>Nyttige lenker</h3>
+        <nav>
+          <NuxtLink to="/">Hjem</NuxtLink>
+          <NuxtLink to="/about">Om oss</NuxtLink>
+          <NuxtLink to="/work">Jobb hos oss</NuxtLink>
+          <NuxtLink to="/contact">Kontakt</NuxtLink>
+        </nav>
       </div>
-      <div class="footer-3">
-        <h2>Kontakt</h2>
-        <div>
-          <img src="/images/icons/phone-symbol.svg" alt="Phone symbol" />
-          <p>+47 123 45 678</p>
-        </div>
-        <div>
-          <img src="/images/icons/mail-symbol.svg" alt="Mail symbol" />
-          <p>mail@aster.no</p>
-        </div>
-        <div>
-          <img src="/images/icons/pin-symbol.svg" alt="Pin symbol" />
-          <p>Havnabakken 33 <br />0874, Oslo</p>
-        </div>
+      <div class="footer-section footer-contact">
+        <h3>Kontakt</h3>
+        <a href="tel:+47913 51 234" class="contact-item">
+          <div class="icon-wrapper">
+            <img src="/images/icons/phone-symbol.svg" alt="Telefon" />
+          </div>
+          <span>+47 913 51 234</span>
+        </a>
+        <a href="mailto:kontakt@aster.no" class="contact-item">
+          <div class="icon-wrapper">
+            <img src="/images/icons/mail-symbol.svg" alt="E-post" />
+          </div>
+          <span>kontakt@aster.no</span>
+        </a>
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=Havnabakken+33,+0874+Oslo,+Norway"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-item"
+        >
+          <div class="icon-wrapper">
+            <img src="/images/icons/pin-symbol.svg" alt="Adresse" />
+          </div>
+          <span>Havnabakken 33, 0874 Oslo</span>
+        </a>
       </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {{ new Date().getFullYear() }} Aster AS. Alle rettigheter reservert.</p>
     </div>
     <Login
       :dialog="loginDialog"
@@ -45,13 +61,21 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useFetch } from "#app";
+import { ref, onMounted } from "vue";
 
 const loginDialog = ref(false);
+const session = ref(null);
 
-const { data: session, refresh } = await useFetch("/api/session");
-console.log("Session data:", session.value);
+async function checkSession() {
+  try {
+    const res = await fetch("/api/session");
+    if (res.ok) session.value = await res.json();
+  } catch {
+    // Session API unavailable
+  }
+}
+
+onMounted(checkSession);
 
 function openLoginDialog() {
   loginDialog.value = true;
@@ -62,121 +86,210 @@ async function handleLogin({ username, password }) {
     try {
       const response = await fetch("/api/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
       if (response.ok) {
-        await refresh();
-        console.log(session.value);
+        await response.json();
+        await checkSession();
       }
-
-      console.log("Response status:", response.status);
-      if (!response.ok) {
-        console.error("Login failed:", response.statusText);
-        return;
-      }
-      const data = await response.json();
-      console.log("Login response data:", data);
-    } finally {
+    } catch {
+      // Login failed silently
     }
-    console.log("Login successful");
-  } else {
-    console.error("Login failed: Username or password is empty");
   }
   loginDialog.value = false;
 }
 </script>
-<style>
-footer {
-  width: 100vw;
-  height: fit-content;
-  background-color: #313131;
+
+<style scoped>
+.site-footer {
+  width: 100%;
+  background-color: var(--color-footer-bg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
 }
 
-footer p {
-  font-size: 0.9rem;
-  color: #ffffff;
-  width: 100%;
-  margin: 0.5rem 0;
-}
-footer a {
-  font-size: 0.9rem;
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0.5rem 0;
-}
-footer h2 {
-  font-size: 1.3rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-}
 .footer-content {
-  width: 85%;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
   justify-content: space-between;
-  flex-direction: row;
-  padding: 2rem 0;
-  z-index: 1;
+  gap: 3rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
 }
-.footer-1 {
+
+.footer-section {
   display: flex;
   flex-direction: column;
-  width: fit-content;
 }
-.footer-2 {
+
+.footer-about {
+  max-width: 300px;
+  align-items: flex-start;
+}
+
+.footer-logo {
+  height: 40px;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+.site-footer h3 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: var(--color-footer-text);
+  line-height: 1.6;
+}
+
+.footer-links nav {
   display: flex;
   flex-direction: column;
-  height: min-content;
+  gap: 0.75rem;
 }
-.footer-3 {
-  display: flex;
-  flex-direction: column;
-  height: min-content;
+
+.footer-links a {
+  font-size: 0.95rem;
+  color: var(--color-footer-text);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
 }
-.footer-3 div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  width: fit-content;
+
+.footer-links a:hover {
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+.footer-contact {
   gap: 0.5rem;
 }
-.footer-3 img {
-  width: 0.8rem;
-  height: 0.8rem;
-}
-.footer-2 a,
-.footer-3 p {
-  white-space: nowrap;
-}
-#footer-logo {
-  width: 75px;
-}
-.logo {
+
+.contact-item {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  width: min-content;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  transition: transform 0.2s ease;
 }
+
+.contact-item:hover {
+  transform: translateX(4px);
+}
+
+.icon-wrapper {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-footer-surface);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s ease;
+}
+
+.contact-item:hover .icon-wrapper {
+  background-color: var(--color-accent);
+}
+
+.contact-item img {
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
+}
+
+.contact-item span {
+  font-size: 0.95rem;
+  color: var(--color-footer-text);
+  transition: color 0.2s ease;
+}
+
+.contact-item:hover span {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  width: 100%;
+  border-top: 1px solid var(--color-footer-surface);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: #666666;
+  text-align: center;
+}
+
 .login-btn {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: transparent;
+  color: #666666;
   border: none;
-  padding: 0.4rem;
+  padding: 0.5rem;
   position: absolute;
-  bottom: 0;
+  bottom: 1rem;
   right: 1rem;
-  cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.login-btn:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-content {
+    gap: 2.5rem;
+  }
+
+  .footer-about {
+    max-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .footer-links,
+  .footer-contact {
+    flex: 1 1 auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer-content {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+    gap: 2rem;
+  }
+
+  .footer-section {
+    flex: 1 1 100%;
+  }
+
+  .site-footer h3 {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .tagline,
+  .footer-links a,
+  .contact-item span {
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
 }
 </style>

@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
     try {
         const token = uuidv4();
 
-        const confirmationLink = `${process.env.BASE_URL}emailConfirmation?token=${token}`;
+        const confirmationLink = `${process.env.BASE_URL}/emailConfirmation?token=${token}`;
         const templatePath = path.resolve('server/templates/emailTemplate.ejs');
         const emailHtml = await ejs.renderFile(templatePath, { name, confirmationLink });
 
@@ -35,14 +35,12 @@ export default defineEventHandler(async (event) => {
         };
 
         await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully');
 
         // Only save to DB if email was sent
         await db.query(
             'INSERT INTO email_confirmations (name, email, phone, occasion, message, token) VALUES (?, ?, ?, ?, ?, ?)',
             [name, email, phone, occasion, message, token]
         );
-        console.log('Database query executed successfully');
 
         return { success: true, message: 'Bekreftelses-e-posten ble sendt.' };
     } catch (error) {

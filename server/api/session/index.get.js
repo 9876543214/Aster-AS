@@ -10,8 +10,6 @@ const db = mysql.createPool({
 
 export default defineEventHandler(async (event) => {
     const sessionToken = getCookie(event, 'loggedIn')
-    console.log('Session token:', sessionToken)
-    if (!sessionToken) console.log('No session token found in cookies')
     if (!sessionToken) return { loggedIn: false }
 
     const [rows] = await db.query(
