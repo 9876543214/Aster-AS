@@ -45,7 +45,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; {{ new Date().getFullYear() }} Aster AS. Alle rettigheter reservert.</p>
+      <p>&copy; {{ new Date().getFullYear() }} Aster AS. Alle rettigheter reservert. <br />
+      Utviklet av Mjønes Consulting</p>
     </div>
     <Login
       :dialog="loginDialog"
@@ -202,7 +203,6 @@ async function handleLogin({ username, password }) {
 .contact-item img {
   width: 16px;
   height: 16px;
-  opacity: 0.9;
 }
 
 .contact-item span {
