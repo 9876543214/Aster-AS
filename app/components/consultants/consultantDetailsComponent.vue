@@ -74,7 +74,7 @@ const consultants = [
     image: "anne_sofie_nordvik.png",
     description:
       "Anne Sofie Nordvik er utdannet siviløkonom fra NHH og har 28 års erfaring fra IT- og teknologisektoren. Hun har hatt sentrale roller i både offentlig og privat sektor, med særlig fokus på IT-ledelse, prosjektstyring og digitalisering.<br><br>Gjennom 10 år i REMA 1000 hadde Anne Sofie flere lederstillinger innen IT, hvor hun blant annet hadde ansvar for utvikling, organisering og forbedring av virksomhetens IT-prosesser. Hennes arbeid bidro til økt struktur, standardisering og effektivisering i et komplekst og forretningskritisk IT-landskap.<br><br>Anne Sofie har erfaring fra både kunde- og konsulentsiden, og har dermed et helhetlig perspektiv på virksomhetsutvikling og teknologiimplementering. Hun har ledet og deltatt i prosjekter innen blant annet detaljhandel, logistikk og offentlig sektor, og er vant til å navigere i skjæringspunktet mellom forretning og teknologi.<br><br>I tillegg er Anne Sofie en pådriver for kompetanseutvikling innen ny teknologi. Hun har utviklet og gjennomført kurs i prompt engineering og bruk av generativ AI, med mål om å gjøre avansert teknologi forståelig og tilgjengelig for virksomheter og medarbeidere.<br><br>Med solid forretningsforståelse, teknologisk innsikt og sterk gjennomføringsevne, er Anne Sofie en verdifull rådgiver og samarbeidspartner for kunder med høye krav til kvalitet og leveranseevne.",
-    phone: "+47 987 65 432",
+    phone: "+47 91789679",
     email: "anne.sofie.nordvik@aster.no",
   },
 ];

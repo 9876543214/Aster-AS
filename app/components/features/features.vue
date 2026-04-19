@@ -138,7 +138,6 @@ onBeforeUnmount(() => {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 2rem 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   opacity: 0;
   transform: translateY(30px);
 }
@@ -153,11 +152,6 @@ onBeforeUnmount(() => {
 .feature-card:nth-child(5).visible { animation-delay: 0.32s; }
 .feature-card:nth-child(6).visible { animation-delay: 0.4s; }
 
-.feature-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-accent);
-}
 
 .feature-icon {
   width: 64px;

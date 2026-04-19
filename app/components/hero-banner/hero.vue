@@ -12,22 +12,48 @@
       <img src="/images/logos/logo-white.svg" alt="Aster AS" class="hero-logo" />
       <h1 class="hero-title">Fra strategi til handling</h1>
       <p class="hero-subtitle">
-        Vi hjelper virksomheter med å lykkes i digital transformasjon ved å
-        kombinere erfaring, innsikt og effektive prosesser — levert av våre
-        dyktige konsulenter.
+        Vi hjelper virksomheter med IT-ledelse, sikkerhet og forbedring av prosesser. 
+        Pragmatisk rådgivning som gir målbare resulteter - ikke bare PowerPoint.
       </p>
       <div class="hero-actions">
         <NuxtLink to="/about" class="btn btn-primary">Om oss</NuxtLink>
         <NuxtLink to="/contact" class="btn btn-outline">Kontakt oss</NuxtLink>
       </div>
     </div>
-    <div class="scroll-indicator">
+    <div class="scroll-indicator" @click="scrollDown">
       <span></span>
     </div>
   </section>
 </template>
 
 <script setup>
+function scrollDown() {
+  const html = document.documentElement;
+  html.style.scrollBehavior = 'auto';
+
+  const start = window.scrollY;
+  const target = window.innerHeight;
+  const distance = target - start;
+  const duration = 1400;
+  let startTime = null;
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+    window.scrollTo(0, start + distance * ease);
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      html.style.scrollBehavior = '';
+    }
+  }
+
+  requestAnimationFrame(step);
+}
 </script>
 
 <style scoped>
@@ -148,6 +174,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  cursor: pointer;
 }
 
 .scroll-indicator span {

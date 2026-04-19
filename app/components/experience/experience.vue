@@ -22,7 +22,7 @@
       <div class="experience-image-wrapper">
         <img
           src="/images/website_images/experience_rope.jpg"
-          alt="Orange tau knyttet rundt stolpe — samarbeid og styrke"
+          alt="Orange tau knyttet rundt stolpe - samarbeid og styrke"
           class="experience-image"
           loading="lazy"
         />

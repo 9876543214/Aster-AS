@@ -1,5 +1,5 @@
 /* ============================================
-   Aster AS — Design Tokens & Global Styles
+   Aster AS - Design Tokens & Global Styles
    ============================================ */
 
 :root {
@@ -39,7 +39,7 @@
 }
 
 /* ============================================
-   Breakpoints (reference — use in @media):
+   Breakpoints (reference - use in @media):
    - sm:  480px  (mobile)
    - md:  768px  (tablet)
    - lg:  1024px (small desktop)
@@ -65,7 +65,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   font-weight: 600;
   margin: 0;
@@ -100,7 +105,7 @@ button {
   padding: 0 var(--content-padding);
 }
 
-/* Focus states — accessibility */
+/* Focus states - accessibility */
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
@@ -122,6 +127,7 @@ html {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

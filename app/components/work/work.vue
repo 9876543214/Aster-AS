@@ -2,7 +2,7 @@
   <div class="work-container container">
     <!-- Intro -->
     <section class="work-intro">
-      <h2>Hva om du kunne få frihet, kunder og lønn — uten unødvendig administrasjon?</h2>
+      <h2>Hva om du kunne få frihet, kunder og lønn - uten unødvendig administrasjon?</h2>
       <p>
         I Aster har vi bevisst holdt de sosiale og administrative kostnadene minimale.
         Her finnes ingen salgsavdeling, ingen unødvendig byråkrati, og ingen andre som
@@ -21,7 +21,7 @@
           <h4>Du er din egen sjef</h4>
           <p>
             Du jobber selvstendig, bruker erfaringen din og referansene dine.
-            Når du fakturerer kunden, går inntekten til deg selv — med unntak av
+            Når du fakturerer kunden, går inntekten til deg selv - med unntak av
             et bidrag til dekning av felleskostnader.
           </p>
         </div>
@@ -42,7 +42,7 @@
           <h4>Kunder gjennom nettverk</h4>
           <p>
             Vi skaffer kunder selv, og vi hjelper hverandre å levere så godt at
-            referansene gir oss nye oppdrag — uten en salgsavdeling i midten.
+            referansene gir oss nye oppdrag - uten en salgsavdeling i midten.
           </p>
         </div>
       </div>
@@ -66,7 +66,7 @@
       <p>
         Hvis du kjenner at du er klar for et sted der innsats = lønn, og
         konsulentlivet ikke skal betales med lange interne møter og høye sosiale
-        kostnader — da kan dette være stedet for deg.
+        kostnader - da kan dette være stedet for deg.
       </p>
       <NuxtLink to="/contact" class="cta-btn">Ta kontakt for en prat</NuxtLink>
     </section>
@@ -125,29 +125,22 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 2rem 1.5rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-accent);
 }
 
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-accent-light);
+  background: none;
   border-radius: var(--radius-sm);
   margin-bottom: 1.25rem;
 }
 
 .card-icon img {
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
 }
 
 .card h4 {

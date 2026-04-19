@@ -233,7 +233,7 @@ export default {
 </template>
 
 <style>
-/* Screen reader only — visually hidden labels */
+/* Screen reader only - visually hidden labels */
 .sr-only {
   position: absolute;
   width: 1px;

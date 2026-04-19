@@ -15,15 +15,15 @@
 
     <div class="hero-content">
       <span class="hero-label">Om Aster</span>
-      <h1 class="hero-title">Vi gjør strategi til handling</h1>
+      <h1 class="hero-title">Vi gjør strategi om til handling</h1>
       <p class="hero-subtitle">
         Siden 1998 har vi hjulpet virksomheter med rådgivning, prosjektledelse
-        og digital transformasjon — med erfarne konsulenter som leverer resultater.
+        og digital transformasjon - med erfarne konsulenter som leverer resultater.
       </p>
 
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-number">25+</span>
+          <span class="stat-number">30+</span>
           <span class="stat-label">Års erfaring</span>
         </div>
         <div class="stat-divider"></div>
@@ -33,7 +33,7 @@
         </div>
         <div class="stat-divider"></div>
         <div class="stat">
-          <span class="stat-number">6+</span>
+          <span class="stat-number">15+</span>
           <span class="stat-label">Store kunder</span>
         </div>
       </div>
