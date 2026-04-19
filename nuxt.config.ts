@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/',
     head: {
+      title: 'Aster AS',
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/images/logos/logo-icon-color.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
